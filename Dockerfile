@@ -14,7 +14,7 @@ COPY  app .
 
 EXPOSE 5000
 
-RUN useradd --create-home myuser
+RUN useradd --create-user myuser
 USER myuser
 
 CMD [ "python3","app.py" ]
