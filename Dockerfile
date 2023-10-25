@@ -1,0 +1,24 @@
+FROM ubuntu:22.04
+
+RUN apt-get update \
+        && apt-get install -y \
+           python3 \
+           python3-pip \
+        && mkdir -p /app \
+        && useradd -d /app -s /bin/bash gosho \
+        && chown -R gosho:gosho /app
+
+COPY requirements.txt /app/requirements.txt
+RUN pip3 install -r /app/requirements.txt
+
+EXPOSE 5000
+
+COPY app/app.py /app
+WORKDIR /app
+
+EXPOSE 5000
+
+USER gosho
+
+ENTRYPOINT ["python3", "app.py"]
+
