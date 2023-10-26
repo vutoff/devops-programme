@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM ubuntu:22.04 as base
 
 RUN apt-get update \
         && apt-get install -y \
@@ -7,6 +7,8 @@ RUN apt-get update \
         && mkdir -p /app \
         && useradd -d /app -s /bin/bash gosho \
         && chown -R gosho:gosho /app
+
+FROM base
 
 COPY requirements.txt /app/requirements.txt
 RUN pip3 install -r /app/requirements.txt
