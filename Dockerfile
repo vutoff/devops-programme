@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM ubuntu:22.04 as builder
  
 RUN apt-get update \
     && apt-get upgrade -y \
@@ -8,6 +8,8 @@ RUN apt-get update \
 
 RUN apt-get install python3.10 -y \
     && apt-get install python3-pip -y
+
+FROM builder
 
 WORKDIR /app
 
