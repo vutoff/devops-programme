@@ -1,9 +1,22 @@
-FROM ubuntu:22.10
+FROM ubuntu:22.04
+ 
+RUN apt-get update \
+    && apt-get upgrade -y \
+    && apt-get install software-properties-common -y \
+    && add-apt-repository ppa:deadsnakes/ppa -y \
+    && apt-get update
 
-ARG PYTHON_VERSION  
+RUN apt-get install python3.10 -y \
+    && apt-get install python3-pip -y
 
-RUN sudo apt-get update \
-    sudo apt-get  upgrade \
-    sudo apt get install python -y python=3.10.13
+WORKDIR /app
 
-ENTRYPOINT [ "pip", "--version" ]
+COPY requirements.txt /app
+
+RUN pip install -r requirements.txt
+
+COPY app /app
+
+EXPOSE 5000
+
+ENTRYPOINT [ "python3", "app.py" ]
