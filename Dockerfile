@@ -1,5 +1,7 @@
 FROM ubuntu:22.04
 
+ENV APP_SECRET="secret"
+
 RUN apt-get update \
       && apt-get install -y --no-install-recommends \
        python3 \
