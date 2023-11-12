@@ -3,13 +3,16 @@ FROM ubuntu:22.04
 RUN apt-get update \
 	&& apt-get install python3 python3-pip -y \
 	&& mkdir /app/ \
-	&& mkdir /req/ \
-	&& useradd -m -d /app -s /bin/bash app
+	&& useradd -m app
 
-ADD requirements.txt /req/
+WORKDIR /app
+
+COPY requirements.txt ./
 RUN pip install -r /req/requirements.txt
 
-ADD app /app
+COPY app ./app
+
+USER app
 
 ENTRYPOINT ["python3"]
 
