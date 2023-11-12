@@ -1,19 +1,14 @@
-FROM ubuntu:22.04
+FROM python:3.9.18-slim
 
-RUN apt-get update \
-      && apt-get install -y --no-install-recommends \
-       python3 \
-       python3-pip \
-      && mkdir -p /app \
-      && useradd -d /app -s /bin/bash app \
-      && chown -R app:app /app
+RUN apt update
 
-COPY requirements.txt /app/requirements.txt
+COPY ./requirements.txt /app/requirements.txt
+
 RUN pip3 install -r /app/requirements.txt
+RUN pip3 install flask
 
-COPY app/app.py /app
+COPY app/app.py /app/app.py
+
 WORKDIR /app
 
-USER app
-
-CMD ["python3", "app.py"]
+CMD [ "python3", "app.py" ]

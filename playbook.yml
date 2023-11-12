@@ -1,0 +1,50 @@
+---
+- name: Play for creating docker image
+  hosts: localhost
+  gather_facts: false
+  become: false
+
+  vars:
+    image_name: "vodoprovod4ika/ansible-homework"
+    image_tag: "0.02"
+    listen_port: "5001"
+
+  tasks:
+    # Moving homework from repo 2 to this one
+    # - name: Create code dir
+    #   ansible.builtin.file:
+    #     dest: code/
+    #     mode: "0766"
+    #     state: directory
+    #
+    # - name: Get latest app code from github
+    #   ansible.builtin.git:
+    #     repo: https://github.com/vutoff/devops-programme
+    #     version: main
+    #     dest: code/
+
+    - name: Install Python requirements
+      ansible.builtin.pip:
+        chdir: ./
+        requirements: requirements.txt
+        state: present
+
+    - name: Build docker image
+      community.docker.docker_image:
+        name: "{{ image_name }}"
+        build:
+          path: ./
+          args:
+            listen_port: "{{ listen_port }}"
+        tag: "{{ image_tag }}"
+        push: true
+        source: build
+
+    - name: Docker run image
+      community.docker.docker_container:
+        name: config-homework
+        image: "{{ image_name }}:{{ image_tag }}"
+        state: started
+        recreate: true
+        ports:
+          - "{{ listen_port }}:5000"
