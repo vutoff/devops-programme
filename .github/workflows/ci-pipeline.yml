@@ -24,7 +24,6 @@ jobs:
           python-version: "3.10"
 
   python-checks:
-    runs-on: ubuntu-latest
     needs: [checkout-code, setup-python]
     steps:
       - name: Install dependencies
