@@ -7,9 +7,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-  check-editorconfig-existance:
-    runs-on: ubuntu-latest
-    steps:
       - uses: editorconfig-checker/action-editorconfig-checker@main
       - run: editorconfig-checker
 
