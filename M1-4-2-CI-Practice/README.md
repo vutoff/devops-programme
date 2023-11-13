@@ -15,9 +15,10 @@ Create a GitHub Actions pipeline that runs on commit to a feature branch (i.e. n
 - Push the built image to your Docker HUB account
 
 :warning: Make sure that you run as many tests in parallel as you see fit
-:warning: Make sure you don't push your image to Docker HUB if Critical vulnerabilities are found
-:warning: Try and use ready-made GH Actions. Avoid shell-out if possible
 
+:warning: Make sure you don't push your image to Docker HUB if Critical vulnerabilities are found
+
+:warning: Try and use ready-made GH Actions. Avoid shell-out if possible
 
 :exclamation: At the end open a PR with your solution.
 
