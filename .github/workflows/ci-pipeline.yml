@@ -1,5 +1,7 @@
 name: CI
-on: [push]
+on:
+  push:
+    branches: "!main"
 
 jobs:
   checkout-code:
@@ -13,9 +15,6 @@ jobs:
       - uses: editorconfig-checker/action-editorconfig-checker@main
       - run: editorconfig-checker
 
-  check-python-code:
-    runs-on: ubuntu-latest
-    steps:
       - name: Set up Python 3.10
         uses: actions/setyp-python@v1
         with:
