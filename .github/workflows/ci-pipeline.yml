@@ -7,51 +7,51 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-    check-editor-config:
-      runs-on: ubuntu-latest
-      needs: checkout-code
-      steps:
-        - uses: editorconfig-checker/action-editorconfig-checker@main
-        - run: editorconfig-checker
+  check-editor-config:
+    runs-on: ubuntu-latest
+    needs: checkout-code
+    steps:
+      - uses: editorconfig-checker/action-editorconfig-checker@main
+      - run: editorconfig-checker
 
-    setup-python:
-      runs-on: ubuntu-latest
-      needs: checkout-code
-      steps:
-        - name: Set up Python 3.10
-          uses: actions/setyp-python@v4
-          with:
-            python-version: 3.10
+  setup-python:
+    runs-on: ubuntu-latest
+    needs: checkout-code
+    steps:
+      - name: Set up Python 3.10
+        uses: actions/setyp-python@v4
+        with:
+          python-version: 3.10
 
-    python-checks:
-      runs-on: ubuntu-latest
-      needs: [checkout-code, setup-python]
-      steps:
-        - name: Install dependencies
-          run: |
-            python -m pip install --upgrade pip
-            python -m pip install -r app/requirements.txt
+  python-checks:
+    runs-on: ubuntu-latest
+    needs: [checkout-code, setup-python]
+    steps:
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r app/requirements.txt
 
-        - name: Analyze code with PyLint
-          run: |
-            python -m pip install pylint
-            find . -name '*.py' -exec pylint {} \;
+      - name: Analyze code with PyLint
+        run: |
+          python -m pip install pylint
+          find . -name '*.py' -exec pylint {} \;
 
-        - name: Analyze code with Black
-          uses: psf/black@stable
-          with:
-            options: "--check --verbose"
-            src: "./app"
+      - name: Analyze code with Black
+        uses: psf/black@stable
+        with:
+          options: "--check --verbose"
+          src: "./app"
 
-        - name: Lint with Markdown-lint
-          uses: articulate/actions-markdownlint@v1
-          with:
-            files: '**/*.md'
-            ignore: node_modules
-            version: 0.28.1
+      - name: Lint with Markdown-lint
+        uses: articulate/actions-markdownlint@v1
+        with:
+          files: '**/*.md'
+          ignore: node_modules
+          version: 0.28.1
 
-        - name: Test with unittest
-          run: |
-            cd app/
-            python -m unittest
+      - name: Test with unittest
+        run: |
+          cd app/
+          python -m unittest
 
