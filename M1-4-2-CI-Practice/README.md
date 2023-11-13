@@ -10,7 +10,7 @@ Create a GitHub Actions pipeline that runs on commit to a feature branch (i.e. n
 - Check for hardcoded secrets (`gitleaks`) - not just our app but the whole repository.
 - SAST - SonarCloud; Review code smells and security issues
 - SCA - Snyk; review security issues
-- Build a Docker image
+- Build a Docker image. Use Git commit SHA as an Image tag.
 - Scan the built image with `Trivy`
 - Push the built image to your Docker HUB account
 
