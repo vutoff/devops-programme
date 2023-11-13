@@ -26,4 +26,3 @@ Make sure our unittest passes (`python -m unittest` executed in the app director
 :warning: Try and use ready-made GH Actions. Avoid shell-out if possible
 
 :exclamation: At the end open a PR with your solution.
-
