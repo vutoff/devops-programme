@@ -1,0 +1,53 @@
+name: CI
+on: [push]
+
+jobs:
+  checkout-code:
+    runs-on: ubuntu-latest
+      - uses: actions/checkout@v2
+
+  check-editorconfig-existance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: editorconfig-checker/action-editorconfig-checker@main
+      - run: editorconfig-checker
+
+  check-python-code:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Python 3.10
+        uses: actions/setyp-python@v1
+        with:
+          python-version: 3.10
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r app/requirements.txt
+          python -m pip install pylint
+
+      - name: Analyze code with PyLint
+        run: |
+          find . -name '*.py' -exec pylint {} \;
+
+      - name: Analyze code with Black
+        uses: psf/black@stable
+        with:
+          options: "--check --verbose"
+          src: "./app"
+
+      - name: Lint with Markdown-lint
+        uses: articulate/actions-markdownlint@v1
+        with:
+          files: '**/*.md'
+          ignore: node_modules
+          version: 0.28.1
+
+  python-unittest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test with unittest
+        run: |
+          cd app/
+          python -m unittest
+
