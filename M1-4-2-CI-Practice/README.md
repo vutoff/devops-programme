@@ -27,3 +27,12 @@ Create a GitHub Actions pipeline that runs on commit to a feature branch (i.e. n
 :warning: Try and use ready-made GH Actions. Avoid shell-out if possible
 
 :exclamation: At the end open a PR with your solution.
+
+## Extra effort
+
+- Create a pre-commit hook that safeguards for the following
+  - hardcoded secrets (`gitleaks`)
+  - yamllint
+  - check-merge-conflict <https://github.com/pre-commit/pre-commit-hooks>
+  - check-added-large-files <https://github.com/pre-commit/pre-commit-hooks>
+- Setup docker-compose with build and run a container
