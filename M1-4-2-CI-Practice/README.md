@@ -4,6 +4,28 @@
 
 - Organize your git repo to follow the guidelines provides in the presentation
 
+```sh
+├── .editorconfig
+├── .github
+│   └── workflows
+│       └── ci-pipeline.yml
+├── .gitignore
+├── .markdownlint.json
+├── .python-version
+├── Dockerfile
+├── LICENSE
+├── README.md
+├── ansible
+│   ├── README.md
+│   └── playbook.yml
+├── app
+│   ├── README.md
+│   ├── app.py
+│   ├── app_test.py
+│   └── requirements.txt
+└── requirements.txt
+```
+
 ## Task description
 
 Create a GitHub Actions pipeline that runs on commit to a feature branch (i.e. not `main`) and performs the following checks on our simple Flask app repository.
