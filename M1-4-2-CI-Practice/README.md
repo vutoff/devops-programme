@@ -1,5 +1,9 @@
 # GitHub Actions Practice
 
+## Prerequisites
+
+- Organize your git repo to follow the guidelines provides in the presentation
+
 ## Task description
 
 Create a GitHub Actions pipeline that runs on commit to a feature branch (i.e. not `main`) and performs the following checks on our simple Flask app repository.
@@ -23,4 +27,3 @@ Create a GitHub Actions pipeline that runs on commit to a feature branch (i.e. n
 :warning: Try and use ready-made GH Actions. Avoid shell-out if possible
 
 :exclamation: At the end open a PR with your solution.
-
