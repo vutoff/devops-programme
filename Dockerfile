@@ -1,13 +1,14 @@
 FROM ubuntu:22.04
-RUN apt-get update -y && \
-    apt-get upgrade -y && \
-    apt-get install -y python3 && \
-    apt-get install -y python3-pip
-COPY requirements.txt requirements.txt
-RUN useradd -ms /bin/bash myuser
-USER myuser
-RUN `pip install -r requirements.txt`
-COPY app /app
+RUN apt-get update && \
+     apt-get install -y && \
+     apt-get install python3 -y && \
+     apt-get install pip -y && \
+     groupadd -g 1234 notroot && \
+     useradd -m -u 1234 -g notroot notroot
+USER notroot
 WORKDIR /app
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+COPY app .
 EXPOSE 5000
 CMD ["python3", "app.py"]
