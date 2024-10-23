@@ -2,7 +2,7 @@ FROM ubuntu:22.04
 RUN apt-get update -y && \
     apt-get upgrade -y && \
     apt-get install -y python3 && \
-    apt-get install python3-pip
+    apt-get install -y python3-pip
 COPY requirements.txt requirements.txt
 RUN `pip install -r requirements.txt`
 RUN useradd -ms /bin/bash myuser
