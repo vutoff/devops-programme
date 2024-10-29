@@ -1,0 +1,35 @@
+- hosts: localhost
+  gather_facts: no
+
+  vars:
+
+  application_directory: /tml/application
+
+  tasks:
+    - name: Create application directory
+      file:
+        path: "{{ application_directory }}"
+        state: directory
+        mode: "0755"
+
+    - name: Get latest git version
+      git:
+        repo: https://github.com/KlimentC/devops-programme.git
+        dest: "{{ application_directory }}"
+        version: main
+        force: yes
+
+    - name: Install dependencies
+      pip:
+        requirements: /tmp/application/requirements.txt
+        virtualenv: "{{ application_directory }}/venv"
+
+    - name: Run unit tests
+      ansible.builtin.command: python -m unittest app_test.py
+      args:
+        chdir: /tmp/application/app
+      register: test_result
+
+    - name: Print test result
+      debug:
+        var: test_result
