@@ -15,7 +15,7 @@ WORKDIR /app
 COPY --chown=appuser:appgroup requirements.txt .
 COPY --chown=appuser:appgroup ./app .
 
-RUN pip3 install -r requirements.txt
+RUN pip3 install flask==3.0.0
 
 USER appuser
 
