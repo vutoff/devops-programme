@@ -1,0 +1,47 @@
+---
+- name: This is the Ansible Build for the Docker
+  hosts: localhost
+  gather_facts: no
+  vars:
+    image_name: "homework"
+    image_tag: "ver7"
+    listen_port: "8000"
+    default_dir: "/mnt/e/Repos/devops-programme"
+    socpath: "unix:///var/run/docker.sock"
+    docker_repo: "klimentchakarovski" # Define your Docker Hub username here
+
+  tasks:
+    - name: Installing the dependencies from requirements.txt
+      pip:
+        requirements: "requirements.txt"
+        executable: "/usr/bin/pip3"
+        chdir: "{{ default_dir }}"
+
+    - name: Build Docker image from Dockerfile
+      community.docker.docker_image:
+        name: "{{ docker_repo }}/{{ image_name }}"
+        tag: "{{ image_tag }}"
+        source: build
+        build:
+          path: "{{ default_dir }}"
+        state: present
+        docker_host: "{{ socpath }}"
+
+    - name: Push Docker image to Docker Hub
+      community.docker.docker_image:
+        name: "{{ docker_repo }}/{{ image_name }}"
+        tag: "{{ image_tag }}"
+        source: local
+        push: true
+
+    - name: Run the container from the image
+      community.docker.docker_container:
+        name: pythonAppRun
+        image: "{{ docker_repo }}/{{ image_name }}:{{ image_tag }}"
+        state: started
+        ports:
+          - "{{ listen_port }}:{{ listen_port }}"
+        env:
+          PORT: "{{ listen_port }}"
+        detach: true
+        docker_host: "{{ socpath }}"
