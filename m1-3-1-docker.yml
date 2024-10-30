@@ -3,7 +3,7 @@
   gather_facts: no
   vars:
     image_name: "dimitar-app02"
-    image_tag: "v4.13"
+    image_tag: "v4.14"
     listen_port: "3000"
     access_port: "5000"
     dockerpath: "/opt/telerik/build"
@@ -31,6 +31,7 @@
 #        push: yes
 
     - name : Tag image and push it to Docker hub!
+      when: git_status.changed == true
       command: docker image tag "{{ image_name }}:latest" "{{ image_name }}:{{ image_tag }}"
       command: docker push "dimitardd/{{ image_name }}"
 
