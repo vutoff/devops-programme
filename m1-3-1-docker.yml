@@ -26,7 +26,10 @@
         source: build
         state: present
 #        push: yes
-    - name: tag_version
+
+    - name: Tag version latest
       docker_image:
         name: latest     # Equal to name in build task.
         repository: "{{ image_name }}"
+        force_tag: true
+        source: local
