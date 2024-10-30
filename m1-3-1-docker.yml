@@ -30,9 +30,11 @@
         state: present
 #        push: yes
 
-    - name : Tag image and push it to Docker hub!
+    - name: Tag image with lates!
 #      when: git_status.changed == true
       command: docker image tag "{{ image_name }}:{{ image_tag }}" "{{ image_name }}:latest"
+    
+    - name: Pus docker image to Docker HUB!
       command: docker push "dimitardd/{{ image_name }}:latest"
 
     - name: Run Docker container!
