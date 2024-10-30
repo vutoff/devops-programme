@@ -33,7 +33,7 @@
     - name : Tag image and push it to Docker hub!
 #      when: git_status.changed == true
       command: docker image tag "{{ image_name }}:latest" "{{ image_name }}:{{ image_tag }}"
-      command: docker push "dimitardd/{{ image_name }}"
+      command: docker push "dimitardd/{{ image_name }}:{{ image_tag }}"
 
     - name: Run Docker container!
       community.docker.docker_container:
