@@ -2,8 +2,7 @@
   gather_facts: no
 
   vars:
-
-  application_directory: /tml/application
+    application_directory: /tmp/application
 
   tasks:
     - name: Create application directory
@@ -21,15 +20,15 @@
 
     - name: Install dependencies
       pip:
-        requirements: /tmp/application/requirements.txt
+        requirements: "{{ application_directory }}/requirements.txt"
         virtualenv: "{{ application_directory }}/venv"
 
     - name: Run unit tests
-      ansible.builtin.command: python -m unittest app_test.py
+      ansible.legacy.command: "{{ application_directory }}/venv/bin/python -m unittest app_test.py"
       args:
-        chdir: /tmp/application/app
+        chdir: "{{ application_directory }}/app"
       register: test_result
 
-    - name: Print test result
+    - name: Print test results
       debug:
-        var: test_result
+        var: test_result.stdout_lines
