@@ -1,0 +1,38 @@
+- name: Build, push and run Docker image M1-3-1 Ansible
+  hosts: localhost
+  gather_facts: no
+  vars:
+    ansible_python_interpreter: "/usr/bin/python3"
+    image_name: "dimitardd/dimitar-app02"
+    image_tag: "v4.1"
+    listen_port: "5000"
+    dockerpath: "/opt/telerik/build"
+    gitbanch: "dimitardd-281024"
+  
+  tasks:
+    - name: Get_Dockerfile_lates_version
+      git:
+        repo: git@github.com:dimitardd/devops-programme.git
+        dest: "{{ dockerpath }}"
+        version: "{{ gitbanch }}"
+        force: yes
+
+    - name: build_container_image
+      docker_image:
+        name: "{{ image_name }}"
+        tag: "{{ image_tag }}"
+        build:
+          path: "{{ dockerpath }}"
+          dockerfile: Dockerfile
+        source: build
+        state: present
+        push: yes
+      register: build_image
+
+    - name: tag_version
+      docker_image:
+        name: "{{ image_name }}"
+        repository: latest   # New tag there.
+        pull: no
+        state: present
+      when: build_image.changed

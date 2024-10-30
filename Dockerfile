@@ -10,6 +10,8 @@ RUN apt-get update -y && \
 	groupadd -r appgroup && \	
 	useradd -r -g appgroup appuser
 
+RUN apt-get install git -y --no-install-recommends
+
 WORKDIR /app
 
 COPY --chown=appuser:appgroup ./app .
