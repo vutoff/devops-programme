@@ -29,7 +29,7 @@
 
     - name: Tag version latest
       docker_image:
-        name: latest     # Equal to name in build task.
+        name: "{{ image_name }}":latest     # Equal to name in build task.
         repository: "{{ image_name }}"
         force_tag: true
         source: local
