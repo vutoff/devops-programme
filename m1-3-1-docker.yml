@@ -29,7 +29,11 @@
         source: build
         state: present
 #        push: yes
-       command: docker push dimitardd/ "{{ image_name }}"
+
+    - name : Tag image and push it to Docker hub!
+      command: docker image tag "{{ image_name }}:latest"
+      command: docker push "dimitardd/{{ image_name }}"
+
     - name: Run Docker container!
       community.docker.docker_container:
         name: "{{ image_name }}"
