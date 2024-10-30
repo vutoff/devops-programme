@@ -35,7 +35,7 @@
       command: docker image tag "{{ image_name }}:{{ image_tag }}" "{{ image_name }}:latest"
     
     - name: Pus docker image to Docker HUB!
-      command: docker push "dimitardd/{{ image_name }}:latest"
+      command: docker push "dimitardd/{{ image_name }}"
 
     - name: Run Docker container!
       community.docker.docker_container:
