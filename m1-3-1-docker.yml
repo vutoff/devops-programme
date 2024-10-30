@@ -2,9 +2,10 @@
   hosts: localhost
   gather_facts: no
   vars:
-    image_name: "dimitardd/dimitar-app02"
-    image_tag: "v4.1"
-    listen_port: "5000"
+    image_name: "dimitar-app02"
+    image_tag: "v4.11"
+    listen_port: "3000"
+    access_port: "5000"
     dockerpath: "/opt/telerik/build"
     gitbanch: "dimitardd-281024"
   
@@ -25,11 +26,13 @@
           dockerfile: Dockerfile
         source: build
         state: present
-#        push: yes
+        push: yes
 
-    - name: Tag version latest
-      docker_image:
-        name: "{{ image_name }}"":latest"     # Equal to name in build task.
-        repository: "{{ image_name }}"
-        force_tag: true
-        source: local
+    - name: Run Docker container!
+      community.docker.docker_container:
+        name: "{{ image_name }}"
+        image: "{{ image_name }}:{{ image_tag }}"
+        state: started
+        restart_policy: always
+        published_ports:
+          - "{{ access_port }}:{{ listen_port }}"
