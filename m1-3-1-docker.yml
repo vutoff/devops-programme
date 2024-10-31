@@ -3,7 +3,7 @@
   gather_facts: no
   vars:
     image_name: "dimitar-app02"
-    image_tag: "v4.16"
+    image_tag: "v4.18"
     listen_port: "3000"
     access_port: "5000"
     dockerpath: "/opt/telerik/build"
