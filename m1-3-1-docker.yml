@@ -32,6 +32,7 @@
     - name: Tag image with lates!
       when: git_status.changed == true
       command: docker image tag "{{ image_name }}:{{ image_tag }}" "{{ image_name }}:latest" "dimitardd/{{ image_name }}"
+      command: docker image tag "{{ image_name }}:{{ image_tag }}" "dimitardd/{{ image_name }}"
     
     - name: Pus docker image to Docker HUB!
       when: git_status.changed == true
