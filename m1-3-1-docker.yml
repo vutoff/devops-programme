@@ -1,13 +1,19 @@
 - name: Build, push and run Docker image M1-3-1 Ansible
   hosts: localhost
   gather_facts: no
+  
   vars:
     image_name: "dimitar-app02"
-    image_tag: "v4.18"
+    image_tag: "v4.19"
     listen_port: "3000"
     access_port: "5000"
     dockerpath: "/opt/telerik/build"
+    dockerhubuser: "dimitardd"
     gitbanch: "dimitardd-281024"
+  
+  vars_files:
+    - /opt/telerik/secrets/secret.yaml 
+  
   
   tasks:
     - name: Get Dockerfile lates version!
@@ -34,6 +40,11 @@
       command: docker image tag "{{ image_name }}:{{ image_tag }}" "{{ image_name }}:latest" "dimitardd/{{ image_name }}"
       command: docker image tag "{{ image_name }}:{{ image_tag }}" "dimitardd/{{ image_name }}"
     
+    - name: Log into DockerHub
+      community.docker.docker_login:
+        username: "{{ dockerhubuser }}"
+        password: "{{ dockerhub }}"
+
     - name: Pus docker image to Docker HUB!
       when: git_status.changed == true
       command: docker image  push "dimitardd/{{ image_name }}"

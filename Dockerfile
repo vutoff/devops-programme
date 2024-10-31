@@ -1,7 +1,7 @@
 FROM ubuntu:22.04
 
 LABEL maintainer="dhd.dimitrov@gmail.com"
-LABEL version="4.18"
+LABEL version="4.19"
 
 RUN apt-get update -y && \
 	apt-get install -y --no-install-recommends \
