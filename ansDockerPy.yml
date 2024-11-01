@@ -1,0 +1,7 @@
+---
+- name: Build Docker container with my Python app
+  hosts: localhost
+  become: yes
+
+  tasks:
+    -name: 
