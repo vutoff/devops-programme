@@ -15,7 +15,7 @@
       git:
         repo: https://github.com/boyanaboneva/devops-programme.git
         dest: "{{ application_directory }}"
-        version: feature/ansible-practice
+        version: feature/ansible_practice
         force: yes
 
     - name: Install dependencies
