@@ -7,24 +7,28 @@
   tasks:
     - name: Create application directory
       file:
-        path: "{{application directory}}"
+        path: "{{ application_directory }}"
         state: directory
         mode: 0755
 
     - name: Get latest git version
       git:
-        repo: git@github.com:boyanaboneva/devops-programme
-        dest: "{{application directory}}"
-        version: main
+        repo: https://github.com/boyanaboneva/devops-programme.git
+        dest: "{{ application_directory }}"
+        version: feature/ansible-practice
         force: yes
 
     - name: Install dependencies
       pip:
-        requirements: "{{application directory}}"/requirements.txt
-        virtualenv: "{{application directory}}"/venv
+        requirements: "{{ application_directory }}/requirements.txt"
+        #virtualenv: "{{ application_directory }}/venv"
 
     - name: Run unit tests
-      ansible.legacy.command: python -m unittest app_test.py
+      ansible.legacy.command: python3 -m unittest app_test.py
       args:
-        chdir: "{{application directory}}"/app
+        chdir: "{{ application_directory }}/app"
       register: test_result
+
+    - name: Print results
+      debug:
+        msg: "{{ test_result.stdout }}"
