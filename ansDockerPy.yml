@@ -6,8 +6,9 @@
     image_name: "pythonapp"
     image_tag: "v1"
     listen_port: 5000
-    dockerhub_uname: "dxs01"
-    
+      #dockerhub_uname: "dxs01"
+  vars_files: 
+    - dockerhubcreds.yml
     
   tasks:
     - name: build docker image
@@ -20,12 +21,12 @@
         state: present
       
     - name: Dockerhub login
-      shell: docker login
+      shell: docker login -u "{{ docker_uname }}" -p "{{ docker_passwd }}"
 
     - name: push docker image
       docker_image:
         name: "{{ image_name }}"
-        repository: "{{ dockerhub_uname }}/{{ image_name }}"
+        repository: "{{ docker_uname }}/{{ image_name }}"
         tag: "{{ image_tag }}"
         push: yes
         source: local
