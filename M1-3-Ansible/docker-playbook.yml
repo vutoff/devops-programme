@@ -1,4 +1,3 @@
----
 - name: Build, push and run Docker container
   hosts: localhost
   vars:
@@ -6,23 +5,23 @@
     image_tag: "e934bdd"             
     listen_port: 8080                
     full_image_name: "{{ image_name }}:{{ image_tag }}"
-    dockerfile_path: "../"           # Path to the directory containing Dockerfile
+    dockerfile_path: "../"
 
   tasks:
-    - name: Ensure Docker Python SDK is installed
+    - name: Is Docker Python SDK installed
       pip:
         name: docker
         state: present
       become: true
 
-    - name: Check if Dockerfile exists in parent directory
+    - name: Is Dockerfile exists in parent dir
       stat:
         path: "{{ dockerfile_path }}/Dockerfile"
       register: dockerfile_check
 
     - name: Fail if Dockerfile is missing
       fail:
-        msg: "Dockerfile not found in the parent directory"
+        msg: "Dockerfile not found"
       when: not dockerfile_check.stat.exists
 
     - name: Build Docker image
@@ -55,16 +54,16 @@
         - build_result is succeeded
       register: push_result
 
-    - name: Remove any existing container
+    - name: If existing container then remove
       community.docker.docker_container:
-        name: python-app
+        name: ansible-test
         state: absent
         force_kill: yes
       ignore_errors: yes
 
     - name: Run Docker container
       community.docker.docker_container:
-        name: python-app
+        name: ansible-test
         image: "{{ full_image_name }}"
         state: started
         recreate: yes
