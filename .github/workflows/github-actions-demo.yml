@@ -21,10 +21,10 @@ jobs:
     runs-on: ubuntu-latest
     needs: Explore-GitHub-Actions
     steps:
-      - run: echi "Code lint"
+      - run: echo "Code lint"
 
   unittest:
     runs-on: ubuntu-latest
     needs: lint
     steps:
-      - run: echi "Code unittest"
+      - run: echo "Code unittest"
