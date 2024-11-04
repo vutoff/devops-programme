@@ -18,11 +18,11 @@ jobs:
       - run: echo "🍏 This job's status is ${{ job.status }}."
 lint:
   runs-on: ubuntu-latest
-  needs: ubuntu-latest
+  needs: Explore-GitHub-Actions
   steps:
-    - run: echi "Co rde unittest"
+    - run: echi "Code lint"
 unittest:
   runs-on: ubuntu-latest
   needs: lint
   steps:
-    - run: echi "Co rde unittest"
+    - run: echi "Code unittest"
