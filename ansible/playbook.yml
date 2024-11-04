@@ -2,7 +2,7 @@
   become: no
 
   vars:
-    image_name: "lutzkanov/test-python-app"
+    image_name: "mlutzkan/test-python-app"
     image_tag: "v0.2"
     application_directory: "/tmp/app"
 
@@ -17,7 +17,7 @@
       git:
         repo: git@github.com:lutzkanov/devops-programme
         dest: "{{ application_directory }}"
-        version: main
+        version: lutzkanov_docker_1
         update: yes
 
     - name: Build Docker image
@@ -28,7 +28,7 @@
         tag: "{{ image_tag }}"
         push: true
         source: build
-        docker_host: "unix://{{ ansible_env.HOME }}/.rd/docker.sock"
+        docker_host: "unix:///var/run/docker.sock"
         state: present
 
     - name: Run the built Docker image
@@ -46,4 +46,4 @@
           interval: 10s
           retries: 3
           start_period: 5s
-        docker_host: "unix://{{ ansible_env.HOME }}/.rd/docker.sock"
+        docker_host: "unix:///var/run/docker.sock"
