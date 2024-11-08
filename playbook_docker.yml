@@ -4,11 +4,21 @@
 
   vars:
     image_name: "bobby84/flaskapp"  # Docker Hub username and app name
-    image_tag: "v0.3"               # Give a tag to your image
+    image_tag: "v0.4"               # Give a tag to your image
     listen_port: 3000               # Add the image port - see Docker desktop
     docker_socket: "unix://{{ ansible_env.HOME }}/.docker/run/docker.sock" # Find your docker.sock file home in the terminal
 
   tasks:
+    - name: Include vault for registry login
+      include_vars:
+        file: vault.yml
+
+    - name: Log into Docker Registry and force re-authorization
+      docker_login:
+        username: "{{ ansible_docker_user }}"
+        password: "{{ ansible_docker_pass }}"
+        reauthorize: yes
+
     - name: Build Docker image by Dockerfile
       community.docker.docker_image:
         name: "{{ image_name }}"
