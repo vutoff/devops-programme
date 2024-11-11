@@ -19,13 +19,13 @@ jobs:
           cache: 'pip'
       - name: Install dependencies
         run: |
-          pip install pylint black flake8 editorconfig-checker
-          npm install -g markdownlint-cli
-          editorconfig-checker
+            pip install pylint black flake8
+            npm install -g markdownlint-cli editorconfig-checker
+            editorconfig-checker
       - name: Lint Python code
         run: |
-          find . -name '*.py' | xargs pylint
-          black --check --diff .
-          flake8 .
+            find . -name '*.py' | xargs pylint
+            black --check --diff .
+            flake8 .
       - name: Check markdown files
         run: markdownlint-cli .
