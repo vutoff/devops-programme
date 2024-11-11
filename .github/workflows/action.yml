@@ -45,7 +45,6 @@ check_markdown:
               }' > .markdownlint.json
           - name: Run markdown lint
             run: markdownlint '**/*.md' --ignore node_modules
-
   pylint:
     runs-on: ubuntu-latest
     strategy:
