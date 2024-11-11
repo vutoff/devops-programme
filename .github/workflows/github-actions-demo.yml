@@ -18,13 +18,13 @@ jobs:
           python-version: '3.10'
           cache: 'pip'
       - run: |
-        pip install pylint black flake8 editorconfig-checker
-        npm install -g markdownlint-cli
-        editorconfig-checker
+          pip install pylint black flake8 editorconfig-checker
+          npm install -g markdownlint-cli
+          editorconfig-checker
     
       - name: Analysing the code with pylint
-        run: 
+      - run: 
           pylint $(git ls-files '*.py')
       - name: Check markdown files
-        run: 
+      - run: 
           markdownlint-cli .
