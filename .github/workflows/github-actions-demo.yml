@@ -23,8 +23,8 @@ jobs:
           editorconfig-checker
     
       - name: Analysing the code with pylint
-          run: 
+          run: |
             pylint $(git ls-files '*.py')
       - name: Check markdown files
-          run: 
+          run: |
             markdownlint-cli .
