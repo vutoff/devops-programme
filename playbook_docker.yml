@@ -1,0 +1,46 @@
+---
+- name: Ansible playbook that build, push and then run the Docker image for the Python app
+  hosts: localhost
+
+  vars:
+    image_name: "bobby84/flaskapp"  # Docker Hub username and app name
+    image_tag: "v0.4"               # Give a tag to your image
+    listen_port: 3000               # Add the image port - see Docker desktop
+    docker_socket: "unix://{{ ansible_env.HOME }}/.docker/run/docker.sock" # Find your docker.sock file home in the terminal
+
+  tasks:
+    - name: Include vault for registry login
+      include_vars:
+        file: vault.yml
+
+    - name: Log into Docker Registry and force re-authorization
+      docker_login:
+        username: "{{ ansible_docker_user }}"
+        password: "{{ ansible_docker_pass }}"
+        reauthorize: yes
+
+    - name: Build Docker image by Dockerfile
+      community.docker.docker_image:
+        name: "{{ image_name }}"
+        tag: "{{ image_tag }}"
+        source: build
+        build:
+          path: "."
+        state: present
+
+    - name: Push docker image to Docker hub
+      community.docker.docker_image:
+        name: "{{ image_name }}"
+        tag: "{{ image_tag }}"
+        source: local
+        push: true
+
+    - name: Run docker container by the image
+      community.docker.docker_container:
+        name: python_app_container
+        image: "{{ image_name }}:{{ image_tag }}"
+        state: started
+        published_ports:
+          - "{{ listen_port }}:{{ listen_port }}"
+        env:
+          PORT: "\"{{ listen_port }}\""    # Escape the quotes, cause it fails, if there are not
