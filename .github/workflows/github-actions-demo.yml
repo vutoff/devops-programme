@@ -1,9 +1,9 @@
 name: GitHub Actions Demo
 run-name: ${{ github.actor }} is testing out GitHub Actions
-on:
-  push:
-    branches-ignore:
-      - 'main'
+on: [push]
+  #push:
+  #  branches-ignore:
+  #    - 'main'
 jobs:
   Pylint:
     runs-on: ubuntu-latest
