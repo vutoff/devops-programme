@@ -22,7 +22,7 @@ jobs:
           npm install -g markdownlint-cli
           editorconfig-checker
       - name: Lint Python code
-          run: |
+      - run: |
             find . -name '*.py' | xargs pylint
             black --check --diff .
             flake8 .
