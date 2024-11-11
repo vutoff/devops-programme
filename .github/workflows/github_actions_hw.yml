@@ -2,7 +2,7 @@ name: example-workflow
 on:
   pull_request:
     branches: ['main']
-    paths: ['folder/**']
+    paths: ['feature/**']
 jobs:
   production-deploy:
     if: ${{ github.ref == 'refs/heads/main' }}
