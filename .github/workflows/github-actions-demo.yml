@@ -27,5 +27,5 @@ jobs:
           black --check --diff .
           flake8 .
       - name: Check markdown files
-      - run:
+      - run: |
           markdownlint-cli .
