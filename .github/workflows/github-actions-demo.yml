@@ -5,26 +5,25 @@ jobs:
  Pylint:
    runs-on: ubuntu-latest
    steps:
-    - name: Check .editorconfig
-      uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
-    - run: pip3 install editorconfig-checker editorconfig-checker
-    - name: Set up Python
-      uses: actions/setup-python@v3
-      with:
-        python-version: '3.10'
-        cache: 'pip'
-    - name: Install dependencies
-      run: pip3 install pylint
-    - name: Install markdownlint-cli
-      run: npm install -g markdownlint-cli
-    - name: Analysing the code with pylint
-      run: pylint $(git ls-files '*.py')
-    - name: Check markdown files
-      run: markdownlint-cli .
+     - name: Check .editorconfig
+       uses: actions/checkout@v2
+       with:
+         fetch-depth: 0
+     - name: Set up Python
+       uses: actions/setup-python@v3
+       with:
+         python-version: '3.10'
+         cache: 'pip'    
+     - run: |
+       pip install pylint black flake8 editorconfig-checker
+       npm install -g markdownlint-cli
+       editorconfig-checker
+     - name: Analysing the code with pylint
+       run: pylint $(git ls-files '*.py')
+     - name: Check markdown files
+       run: markdownlint-cli .
 
-      
+
   # Explore-GitHub-Actions:
   #   runs-on: ubuntu-latest
   #   steps:
