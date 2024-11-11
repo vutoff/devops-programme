@@ -17,15 +17,15 @@ jobs:
         with:
           python-version: '3.10'
           cache: 'pip'
-      - run: |
+      - name: Install dependencies
+        run: |
           pip install pylint black flake8 editorconfig-checker
           npm install -g markdownlint-cli
           editorconfig-checker
       - name: Lint Python code
-      - run: |
-            find . -name '*.py' | xargs pylint
-            black --check --diff .
-            flake8 .
+        run: |
+          find . -name '*.py' | xargs pylint
+          black --check --diff .
+          flake8 .
       - name: Check markdown files
-      - run:
-            markdownlint-cli .
+        run: markdownlint-cli .
