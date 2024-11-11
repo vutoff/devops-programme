@@ -105,7 +105,6 @@ jobs:
         args: >
           -Dsonar.organization=dxs-0
           -Dsonar.projectKey=dxs-0_Telerik
-
   snyk:
     runs-on: ubuntu-latest
     steps:
@@ -117,4 +116,5 @@ jobs:
         with:
           args: --severity-threshold=high
 
+#check snyk and proceed with Docker, FIX YOUR ENVIRONMENT FOR VIM AND TMUX, MAKE IT WORK
 
