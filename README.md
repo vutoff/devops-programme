@@ -14,3 +14,8 @@ To push the docker image to Docker Hub, execute:
 ```
 docker push bobby84/getting-started-index-html
 ```
+
+To run the playbook_docker.yml, execute the bellow command:
+```
+ansible-playbook playbook_docker.yml
+```
