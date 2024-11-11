@@ -16,12 +16,15 @@ jobs:
         python-version: '3.10'
         cache: 'pip'
     - name: Install dependencies
-      run: pip3 install pylint markdown-lint-cli
+      run: pip3 install pylint
+    - name: Install markdownlint-cli
+      run: npm install -g markdownlint-cli
     - name: Analysing the code with pylint
       run: pylint $(git ls-files '*.py')
     - name: Check markdown files
-      run: 
-        markdownlint-cli .
+      run: markdownlint-cli .
+
+      
   # Explore-GitHub-Actions:
   #   runs-on: ubuntu-latest
   #   steps:
