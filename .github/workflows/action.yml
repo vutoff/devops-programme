@@ -71,8 +71,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          cd ../..
-          pip install -r requirements.txt
+          find . -regex '.*requirements.txt$' | pip install -r requirements.txt
           
       - name: Checkout code
         uses: actions/checkout@v2
@@ -101,7 +100,7 @@ jobs:
         # Disabling shallow clone is recommended for improving relevancy of reporting
         fetch-depth: 0
     - name: SonarCloud Scan
-      uses: sonarsource/sonarcloud-github-action@<action version> # Ex: v2.1.0, See the latest version at https://github.com/marketplace/actions/sonarcloud-scan
+      uses: sonarsource/sonarcloud-github-action@<action version>v3.1.0 # Ex: v2.1.0, See the latest version at https://github.com/marketplace/actions/sonarcloud-scan
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
   snyk:
@@ -112,3 +111,5 @@ jobs:
         uses: snyk/actions/python-3.8@master
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+          with:
+            args: --severity-threshold=high 
