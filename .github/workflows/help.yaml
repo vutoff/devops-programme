@@ -3,11 +3,11 @@ name: github actions CI
 on:
   push: 
     branches:
-      - 'feature/**' 
+      - '**' 
 
   pull_request: 
 branches: 
-      - 'main'
+      - '**'
 
 jobs:
 
