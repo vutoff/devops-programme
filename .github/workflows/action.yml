@@ -26,25 +26,24 @@ jobs:
         with:
           black_args: ". --check"
 
-check_markdown:
-      needs: setup
-      runs-on: ubuntu-latest
-      steps:
-          - uses: actions/checkout@v2
-          - name: Setup Node.js
-            uses: actions/setup-node@v3
-            with:
-              node-version: '16'
-          - name: Install markdownlint-cli
-            run: npm install -g markdownlint-cli
-          - name: Create markdownlint config
-            run: |
-              echo '{
-                "MD013": false,
-                "line-length": false
-              }' > .markdownlint.json
-          - name: Run markdown lint
-            run: markdownlint '**/*.md' --ignore node_modules
+  check_markdown:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      - name: Install markdownlint-cli
+        run: npm install -g markdownlint-cli
+      - name: Create markdownlint config
+        run: |
+          echo '{
+            "MD013": false,
+            "line-length": false
+          }' > .markdownlint.json
+      - name: Run markdown lint
+        run: markdownlint '**/*.md' --ignore node_modules
   pylint:
     runs-on: ubuntu-latest
     strategy:
