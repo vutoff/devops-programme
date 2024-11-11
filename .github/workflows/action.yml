@@ -103,7 +103,7 @@ jobs:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       with: 
         args: >
-          -Dsonar.organization=Atanas Petrov
+          -Dsonar.organization=dxs-0
           -Dsonar.projectKey=dxs-0_Telerik
 
   snyk:
