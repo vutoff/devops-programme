@@ -9,20 +9,19 @@ jobs:
       uses: actions/checkout@v2
       with:
         fetch-depth: 0
-    - run: pip install editorconfig-checker editorconfig-checker
+    - run: pip3 install editorconfig-checker editorconfig-checker
     - name: Set up Python
       uses: actions/setup-python@v3
       with:
         python-version: '3.10'
         cache: 'pip'
     - name: Install dependencies
-      run: pip install pylint black flake8 markdown-lint-cli
+      run: pip3 install pylint black flake8 markdown-lint-cli
     - name: Analysing the code with pylint
       run: pylint $(git ls-files '*.py')
     - name: Check markdown files
       run: 
         markdownlint-cli .
-
   # Explore-GitHub-Actions:
   #   runs-on: ubuntu-latest
   #   steps:
