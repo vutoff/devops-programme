@@ -23,9 +23,9 @@ jobs:
           editorconfig-checker
       - name: Lint Python code
       - run: |
-            find . -name '*.py' | xargs pylint
-            black --check --diff .
-            flake8 .
+          find . -name '*.py' | xargs pylint
+          black --check --diff .
+          flake8 .
       - name: Check markdown files
-          run: |
-            markdownlint-cli .
+      - run:
+          markdownlint-cli .
