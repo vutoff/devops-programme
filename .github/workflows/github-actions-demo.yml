@@ -29,7 +29,6 @@ jobs:
       - name: Install dependencies
         run: |
             pip install pylint black flake8
-            pip install -r requirements.txt
             npm install -g markdownlint-cli editorconfig-checker
             editorconfig-checker
       - name: Run unit tests
@@ -48,6 +47,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Install Snyk dependencies
+        run: pip install -r requirements.txt
       - name: Run Snyk to check for vulnerabilities
         uses: snyk/actions/python@master
         env:
