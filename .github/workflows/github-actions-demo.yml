@@ -33,4 +33,3 @@ jobs:
             flake8 .
       - name: Check markdown files
         run: markdownlint-cli .
-        
