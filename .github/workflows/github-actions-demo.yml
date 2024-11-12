@@ -42,15 +42,27 @@ jobs:
             flake8 .
       - name: Check markdown files
         run: markdownlint-cli .
-  sonarcloud:
+  security:
     #needs: Pylint
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
-    - name: SonarCloud Scan
-      uses: SonarSource/sonarcloud-github-action@master
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      - uses: actions/checkout@v2
+      - name: Run Snyk to check for vulnerabilities
+        uses: snyk/actions/python@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          command: monitor
+          args: --all-projects --severity-threshold=high
+  #sonarcloud:
+  #  #needs: Pylint
+  #  runs-on: ubuntu-latest
+  #  steps:
+  #  - uses: actions/checkout@v2
+  #    with:
+  #      fetch-depth: 0
+  #  - name: SonarCloud Scan
+  #    uses: SonarSource/sonarcloud-github-action@master
+  #    env:
+  #      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
