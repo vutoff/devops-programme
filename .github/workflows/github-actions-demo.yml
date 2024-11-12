@@ -72,7 +72,7 @@ jobs:
     needs: docker-build
     runs-on: ubuntu-latest
     outputs:
-      has_critical_vulnerabilities: ${{ trivy.outputs.exit_code }}
+      has_critical_vulnerabilities: ${{ trivy-scan.outputs.exit_code }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
