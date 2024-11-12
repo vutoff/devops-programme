@@ -29,6 +29,7 @@ jobs:
       - name: Install dependencies
         run: |
             pip install pylint black flake8
+            pip install -r requirements.txt
             npm install -g markdownlint-cli editorconfig-checker
             editorconfig-checker
       - name: Run unit tests
@@ -53,7 +54,7 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
           command: test
-          args: --severity-threshold=high #--all-projects --severity-threshold=high 
+          args: --file=requirements.txt --severity-threshold=high #--all-projects --severity-threshold=high 
   #sonarcloud:
   #  #needs: Pylint
   #  runs-on: ubuntu-latest
