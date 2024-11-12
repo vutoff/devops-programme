@@ -42,7 +42,7 @@ jobs:
       - name: Check markdown files
         run: markdownlint-cli .
   sonarcloud:
-    needs: test-lint
+    needs: Pylint
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
