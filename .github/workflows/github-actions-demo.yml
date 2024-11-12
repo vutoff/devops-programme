@@ -41,10 +41,10 @@ jobs:
             flake8 .
       - name: Check markdown files
         run: markdownlint-cli .
-    sonarcloud:
-      needs: test-lint
-      runs-on: ubuntu-latest
-      steps:
+  sonarcloud:
+    needs: test-lint
+    runs-on: ubuntu-latest
+    steps:
     - uses: actions/checkout@v2
       with:
         fetch-depth: 0
