@@ -26,6 +26,10 @@ jobs:
             pip install pylint black flake8
             npm install -g markdownlint-cli editorconfig-checker
             editorconfig-checker
+      - name: Run unit tests
+        run: |
+            cd app
+            python -m unittest
       - name: Lint Python code
         run: |
             find . -name '*.py' | xargs pylint
