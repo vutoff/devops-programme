@@ -87,7 +87,7 @@ jobs:
           ignore-unfixed: true
           severity: 'CRITICAL' #with HIGH it fails in some Ansible Collections within the Docker
   push-to-docker:
-    needs: [docker-build, trivy]
+    needs: trivy
     runs-on: ubuntu-latest
     if: ${{ needs.trivy.outputs.has_critical_vulnerabilities == '0' }}
     steps:
