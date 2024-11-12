@@ -3,7 +3,7 @@ ansible-compat==24.9.1
 ansible-core==2.17.5
 ansible-lint==24.9.2
 atheris==2.3.0
-BeautifulSoup==3.2.2
+beautifulsoup4==4.12.3
 cps==3.3.6
 docker_compose==1.29.2
 elasticapm==0
