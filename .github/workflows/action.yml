@@ -121,5 +121,5 @@ jobs:
             --severity-threshold=high
             --skip-unresolved
 
-#check snyk and proceed with Docker, FIX YOUR ENVIRONMENT FOR VIM AND TMUX, MAKE IT WORK !
+#check snyk and proceed with Docker, FIX YOUR ENVIRONMENT FOR VIM AND TMUX, MAKE IT WORK 
 
