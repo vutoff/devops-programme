@@ -120,6 +120,10 @@ jobs:
           args: > 
             --severity-threshold=high
             --skip-unresolved
+      - name: fix vulnerabilities with snyk
+        run: snyk fix
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
 #check snyk and proceed with Docker, FIX YOUR ENVIRONMENT FOR VIM AND TMUX, MAKE IT WORK 
 
