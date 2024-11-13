@@ -5,6 +5,10 @@ on:
     branches:
       - '**' 
 
+permissions:
+  contents: read
+  pull-requests: write
+
   pull_request:
    types: [opened, synchronize, reopened]
 
