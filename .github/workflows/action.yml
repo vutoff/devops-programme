@@ -97,17 +97,23 @@ jobs:
       with:
         # Disabling shallow clone is recommended for improving relevancy of reporting
         fetch-depth: 0
+    - name: Debug Pull Request Data
+      run: |
+        echo "Pull Request Number: ${{ github.event.pull_request.number }}"
+        echo "Pull Request Head Ref: ${{ github.event.pull_request.head.ref }}"
+        echo "Pull Request Base Ref: ${{ github.event.pull_request.base.ref }}"        
     - name: SonarCloud Scan
       uses: sonarsource/sonarcloud-github-action@v3.1.0 # Ex: v2.1.0, See the latest version at https://github.com/marketplace/actions/sonarcloud-scan
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      with: 
+      with:
         args: >
           -Dsonar.organization=dxs-0
           -Dsonar.projectKey=dxs-0_Telerik
           -Dsonar.pullrequest.key=${{ github.event.pull_request.number }}
-          -Dsonar.pullrequest.branch=${{ github.head_ref }}
-          -Dsonar.pullrequest.base=${{ github.base_ref }}
+          -Dsonar.pullrequest.branch=${{ github.event.pull_request.head.ref }}
+          -Dsonar.pullrequest.base=${{ github.event.pull_request.base.ref }}
+
   snyk:
     runs-on: ubuntu-latest
     steps:
