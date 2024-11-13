@@ -113,7 +113,7 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - name: Install Snyk 
-        run: pip install snyk
+        run: npm install -g snyk
       - name: Run Snyk to check for vulnerabilities
         uses: snyk/actions/python-3.8@master
         env:
