@@ -117,9 +117,9 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          args: > 
-          --severity-threshold=high
-          --skip-unresolved
+            args: > 
+            --severity-threshold=high
+            --skip-unresolved
 
 #check snyk and proceed with Docker, FIX YOUR ENVIRONMENT FOR VIM AND TMUX, MAKE IT WORK !
 
