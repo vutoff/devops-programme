@@ -4,11 +4,6 @@ on:
   push:
     branches:
       - '**' 
-
-permissions:
-  contents: read
-  pull-requests: write
-
   pull_request:
    types: [opened, synchronize, reopened]
 
@@ -95,6 +90,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   sonarcloud:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+
     steps:
     - uses: actions/checkout@v4
       with:
