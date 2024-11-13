@@ -103,9 +103,9 @@ jobs:
         SONAR_HOST_URL: https://sonarcloud.io
       with:
         args: >
-          -Dsonar.organization=dxs-0
-          -Dsonar.projectKey=dxs-0_Telerik
-          -Dsonar.pullrequest.key=${{ github.event.pull_request.number }}
+          -Dsonar.organization=dxs-0-1
+          -Dsonar.projectKey=dxs-0_devops-programme
+          -Dsonar.pullrequest.key=${{ github.event.number }}
           -Dsonar.pullrequest.branch=${{ github.event.pull_request.head.ref }}
           -Dsonar.pullrequest.base=${{ github.event.pull_request.base.ref }}     
 
