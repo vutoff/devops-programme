@@ -134,5 +134,5 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
-#check snyk and proceed with Docker, FIX YOUR ENVIRONMENT FOR VIM AND TMUX, MAKE IT WORK !
+#check snyk and proceed with Docker, FIX YOUR ENVIRONMENT FOR VIM AND TMUX, MAKE IT WORK !!
 
