@@ -18,8 +18,8 @@ jobs:
        with:
          python-version: '3.10'
          cache: 'pip'
-     - run: 
-            pip3 install pylint black flake8 &&\
+     - run: |
+            pip3 install pylint black flake8
             npm install -g markdownlint-cli editorconfig-checker
      - name: Check .editorconfig
        run: editorconfig-checker
