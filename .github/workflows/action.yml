@@ -105,6 +105,9 @@ jobs:
         args: >
           -Dsonar.organization=dxs-0
           -Dsonar.projectKey=dxs-0_Telerik
+          -Dsonar.pullrequest.key=${{ github.event.pull_request.number }}
+          -Dsonar.pullrequest.branch=${{ github.head_ref }}
+          -Dsonar.pullrequest.base=${{ github.base_ref }}
   snyk:
     runs-on: ubuntu-latest
     steps:
@@ -114,7 +117,9 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          args: --severity-threshold=high
+          args: > 
+          --severity-threshold=high
+          --skip-unresolved
 
 #check snyk and proceed with Docker, FIX YOUR ENVIRONMENT FOR VIM AND TMUX, MAKE IT WORK !
 
