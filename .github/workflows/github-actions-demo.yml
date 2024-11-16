@@ -22,7 +22,7 @@ jobs:
             pip install pylint black flake8
             npm install -g markdownlint-cli editorconfig-checker
      - name: Check .editorconfig
-       run: editorconfig-checker/action-editorconfig-checker@v2
+       run: editorconfig-checker
      - name: Analysing the code with pylint
        run: pylint $(git ls-files '*.py')
      - name: Markdownlint config file
