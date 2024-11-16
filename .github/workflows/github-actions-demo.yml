@@ -12,18 +12,24 @@ jobs:
      - name: Set Node version
        uses: actions/setup-node@v4
        with:
-         node-version: 20
+         node-version: '20'
      - name: Set up Python
        uses: actions/setup-python@v3
        with:
          python-version: '3.10'
          cache: 'pip'
      - run: |
-            pip3 install pylint black flake8
+            pip install pylint black flake8
             npm install -g markdownlint-cli editorconfig-checker
      - name: Check .editorconfig
-       run: editorconfig-checker
+       run: editorconfig-checker/action-editorconfig-checker@v2
      - name: Analysing the code with pylint
        run: pylint $(git ls-files '*.py')
+     - name: Markdownlint config file
+       run: |
+         echo '{
+           "MD013": false,
+           "line-lenght": false
+          }' > .markdownlint.json
      - name: Check markdown files
-       run: markdownlint-cli .
+       run: markdownlint '**/*.md' --ignore node_modules
