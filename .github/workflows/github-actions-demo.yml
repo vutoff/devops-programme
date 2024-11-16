@@ -28,9 +28,28 @@ jobs:
      - name: Markdownlint config file
        run: |
          echo '{
-           "MD013": false,
            "MD012": false,
+           "MD013": false,
            "line-lenght": false
           }' > .markdownlint.json
      - name: Markdown lint check
        run: markdownlint '**/*.md' --ignore node_modules
+ Unit_Test:
+    needs: Pylint
+    runs-on: ubuntu-lates
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          cache: 'pip'
+      - run: |
+            pip install flask
+      - name: Run app test
+        run: |
+          cd app
+          python -m unittest app_test.py
+          
+
+
