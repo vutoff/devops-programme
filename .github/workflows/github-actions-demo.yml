@@ -34,9 +34,9 @@ jobs:
           }' > .markdownlint.json
      - name: Markdown lint check
        run: markdownlint '**/*.md' --ignore node_modules
- Unit_Test:
+ UnitTest:
     needs: Pylint
-    runs-on: ubuntu-lates
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python
@@ -50,6 +50,6 @@ jobs:
         run: |
           cd app
           python -m unittest app_test.py
-          
+
 
 
