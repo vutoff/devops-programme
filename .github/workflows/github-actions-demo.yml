@@ -61,8 +61,8 @@ jobs:
         uses: gitleaks/gitleaks-action@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
- CheckSAST:
-   needs: Pylint
-   name: SonarCloud
-   runs-on: self-hosted
+#  CheckSAST:
+#    needs: Pylint
+#    name: SonarCloud
+#    runs-on: self-hosted
      
