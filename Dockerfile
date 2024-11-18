@@ -7,6 +7,7 @@ RUN apt-get update -y && \
 	apt-get install -y --no-install-recommends \
 	python3 \
 	python3-pip && \
+	apt-get clean && \
 	groupadd -r appgroup && \	
 	useradd -r -g appgroup appuser
 
