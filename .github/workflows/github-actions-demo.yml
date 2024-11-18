@@ -81,3 +81,4 @@ jobs:
         args: >
           -Dsonar.projectKey=devops-programme
           -Dsonar.organization=dimitardd
+          -Dsonar.sonar.tests=app
