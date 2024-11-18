@@ -3,7 +3,7 @@ run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: [push]
 jobs:
  Pylint:
-   runs-on: self-hosted
+   runs-on: ubuntu-latest
    steps:
      - name: Check out repo
        uses: actions/checkout@v2
@@ -16,7 +16,7 @@ jobs:
      - name: Set up Python
        uses: actions/setup-python@v3
        with:
-         python-version: '3.10.5'
+         python-version: '3.10'
          cache: 'pip'
      - run: |
             pip install pylint black flake8 flask
@@ -36,13 +36,13 @@ jobs:
        run: markdownlint '**/*.md' --ignore node_modules
  UnitTest:
     needs: Pylint
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.10.5'
+          python-version: '3.10'
           cache: 'pip'
       - run: |
             pip install flask
@@ -52,7 +52,7 @@ jobs:
           python -m unittest app_test.py
  CheckforSecrets:
     needs: Pylint
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
