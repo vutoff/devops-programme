@@ -78,7 +78,8 @@ jobs:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         
       with:
+        projectBaseDir: app
         args: >
           -Dsonar.projectKey=devops-programme
           -Dsonar.organization=dimitardd
-          -Dsonar.sonar.tests=app
+          -Dsonar.verbose=true
