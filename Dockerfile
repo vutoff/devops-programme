@@ -13,7 +13,7 @@ RUN apt-get update -y && \
 
 WORKDIR /app
 
-COPY --chown=appuser:appgroup ./app .
+COPY --chown=appuser:appgroup --chmod=755 ./app .
 
 RUN pip3 install flask==3.0.0
 
