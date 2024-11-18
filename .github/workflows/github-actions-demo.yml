@@ -61,8 +61,22 @@ jobs:
         uses: gitleaks/gitleaks-action@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#  CheckSAST:
-#    needs: Pylint
-#    name: SonarCloud
-#    runs-on: self-hosted
-     
+ CheckSAST:
+   needs: Pylint
+   name: SonarCloud
+   runs-on: ubuntu-latest
+   steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0  
+    - name: SonarCloud Scan
+      uses: SonarSource/sonarcloud-github-action@master
+      env: 
+        SONARQUBE_TOKEN: ${{ secrets.SONARQUBE_TOKEN }}
+    
+      with:
+        args: >
+          -Dsonar.projectKey=devops-programme
+          -Dsonar.organization=dimitardd
+          -Dsonar.sources=.
+          -Dsonar.branch.name=main
