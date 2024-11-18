@@ -79,4 +79,4 @@ jobs:
           -Dsonar.projectKey=devops-programme
           -Dsonar.organization=dimitardd
           -Dsonar.sources=.
-          -Dsonar.branch.name=main
+          -Dsonar.branch.name=dimitardd-281024
