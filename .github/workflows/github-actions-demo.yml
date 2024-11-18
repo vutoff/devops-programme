@@ -80,4 +80,3 @@ jobs:
           -Dsonar.organization=dimitardd
           -Dsonar.sources=.
           -Dsonar.branch.name=main
-          
