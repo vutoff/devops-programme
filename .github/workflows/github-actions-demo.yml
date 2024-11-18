@@ -3,7 +3,7 @@ run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: [push]
 jobs:
  Pylint:
-   runs-on: ubuntu-latest
+   runs-on: self-hosted
    steps:
      - name: Check out repo
        uses: actions/checkout@v2
@@ -36,7 +36,7 @@ jobs:
        run: markdownlint '**/*.md' --ignore node_modules
  UnitTest:
     needs: Pylint
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python
@@ -52,7 +52,7 @@ jobs:
           python -m unittest app_test.py
  CheckforSecrets:
     needs: Pylint
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
         with:
@@ -61,6 +61,8 @@ jobs:
         uses: gitleaks/gitleaks-action@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-
-
+ CheckSAST:
+   needs: Pylint
+   name: SonarCloud
+   runs-on: self-hosted
+     
