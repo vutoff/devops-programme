@@ -141,7 +141,9 @@ jobs:
           command: test
 
   push-to-docker:
-    needs: trivy
+    needs:
+      - trivy
+      - snyk
     runs-on: ubuntu-latest
     if: ${{ needs.trivy.outputs.has_critical_vulnerabilities == '0' }}
     steps:
