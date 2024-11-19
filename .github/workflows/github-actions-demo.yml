@@ -78,10 +78,10 @@ jobs:
          output: 'trivy-output.sarif'
          severity: 'CRITICAL'
      - name: Trivy Scan Output
-     - uses: github/codeql-action/upload-sarif@v3
+       uses: github/codeql-action/upload-sarif@v3
        with:
          sarif_file: 'trivy-output.sarif'
-     #  CheckSAST:
+#  CheckSAST:
 #    needs: Pylint
 #    name: SonarCloud
 #    runs-on: ubuntu-latest
