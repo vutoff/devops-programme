@@ -1,6 +1,4 @@
-# M1-3-1 Configuration Management
-
-## Ansible Task
+# Configuration Management with Ansible 
 
 Create an Ansible playbook that build, push and then run the Docker image for the Python
 application. Let your playbook has the following variables:

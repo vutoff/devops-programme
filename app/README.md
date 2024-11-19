@@ -1,4 +1,5 @@
-## Simple Flask Application
+# Simple Flask Application 
+
 This is a basic Flask application that demonstrates setting up a route and returning a response.
 
 Getting Started
@@ -12,7 +13,7 @@ Running the application:
 Save the code as app.py.
 Open your terminal and navigate to the directory containing app.py.
 Run the application: python app.py
-This will start the Flask development server, typically accessible at http://localhost:5000/ by default.
+This will start the Flask development server, typically accessible at localhost port 5000 by default.
 
 Explanation:
 
@@ -20,10 +21,14 @@ The app.py file initializes a Flask application instance using Flask(__name__).
 The @app.route("/") decorator defines a route handler for the root path (/).
 The hello_world() function is the view function associated with the root route. It returns a simple "Hello, World!" message.
 The if __name__ == "__main__": block ensures the application code only runs when executed directly (not imported as a module).
-Inside this block, app.run() starts the development server. It listens on all interfaces (0.0.0.0) and uses the port specified by the environment variable PORT (defaulting to 5000).
+Inside this block, app.run() starts the development server. It listens on all interfaces (0.0.0.0) and uses the port
+specified by the environment variable PORT (defaulting to 5000).
+
 Deployment:
 
-For production deployment, consider using a WSGI server like Gunicorn. Refer to the Flask documentation for more details on deployment strategies: https://flask.palletsprojects.com/en/2.2.x/deploying/
+For production deployment, consider using a WSGI server like Gunicorn. 
+Refer to the Flask documentation for more details on deployment strategies at 
+flask.palletsprojects.com project
 
 Further Development:
 
