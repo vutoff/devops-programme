@@ -64,23 +64,39 @@ jobs:
         uses: gitleaks/gitleaks-action@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
- CheckSAST:
-   needs: Pylint
-   name: SonarCloud
+ TrivySecurity:
    runs-on: ubuntu-latest
+   needs: Pylint
    steps:
-    - uses: actions/checkout@v4
-      with:
-        fetch-depth: 0  
-    - name: SonarCloud Scan
-      uses: sonarsource/sonarcloud-github-action@v3.1.0
-      env: 
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        
-      with:
-        projectBaseDir: app
-        args: >
-          -Dsonar.projectKey=devops-programme
-          -Dsonar.organization=dimitardd
-          -Dsonar.verbose=true
-          -Dsonar.branch.name=dimitardd-281024
+     - uses: actions/checkout@v4
+     - name: Trivy Vulnerability Scan
+       uses: aquasecurity/trivy-action@0.20.0
+       with:
+         scan-type: 'fs'
+         ignore-unfixed: true
+         format: 'sarif'
+         output: 'trivy-output.sarif'
+         severity: 'CRITICAL'
+     - name: Trivy Scan Results
+       uses: github/codeql-action/upload-sarif@v3
+       with:
+         sarif_file: 'trivy-output.sarif'
+#  CheckSAST:
+#    needs: Pylint
+#    name: SonarCloud
+#    runs-on: ubuntu-latest
+#    steps:
+#     - uses: actions/checkout@v4
+#       with:
+#         fetch-depth: 0  
+#     - name: SonarCloud Scan
+#       uses: sonarsource/sonarcloud-github-action@v3.1.0
+#       env: 
+#         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+#       with:
+#         projectBaseDir: app
+#         args: >
+#           -Dsonar.projectKey=devops-programme
+#           -Dsonar.organization=dimitardd
+#           -Dsonar.verbose=true
+#           -Dsonar.branch.name=dimitardd-281024
