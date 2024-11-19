@@ -1,0 +1,37 @@
+# Contributing to U34
+Thank you for your interest in contributing to U34! We welcome and appreciate all contributions, whether they are bug reports, feature requests, or code changes.
+
+Before you start, please take a moment to review the following guidelines to ensure a smooth and effective contribution process.
+
+## Code of Conduct
+
+By participating in this project, you agree to abide by the [Contributor Covenant Code of Conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/). Please familiarize yourself with the code of conduct and ensure your contributions align with it.
+
+## How to Contribute
+
+There are several ways you can contribute to U34:
+
+1. **Report Bugs**: If you encounter any bugs or issues, please report them by [opening a new issue](https://github.com/u34-georgi-telerik/devops-programme/issues/new/choose) on the project's GitHub repository. Be sure to provide a clear and detailed description of the problem, including steps to reproduce the issue.
+
+2. **Suggest Features**: Have an idea for a new feature or an improvement to an existing one? [Open a new issue](https://github.com/u34-georgi-telerik/devops-programme/issues/new/choose) and describe your proposal. We'll be happy to discuss it with you.
+
+3. **Submit Code Changes**: If you'd like to contribute code changes, follow these steps:
+   - Fork the repository and create a new branch for your changes.
+   - Make your changes and ensure they align with the project's coding style and guidelines.
+   - Write tests for your changes, if applicable.
+   - Commit your changes and push them to your forked repository.
+   - [Open a pull request](https://github.com/u34-georgi-telerik/devops-programme/pulls) against the main branch of the original repository.
+
+4. **Provide Feedback**: Even if you don't have a specific bug report or feature request, we welcome any feedback or suggestions you may have about the project. You can [open a new issue](https://github.com/u34-georgi-telerik/devops-programme/issues/new/choose) or reach out to the project maintainers directly.
+
+## Development Environment Setup
+
+To set up your development environment, please follow these steps:
+
+1. Clone the repository: `git clone https://github.com/u34-georgi-telerik/devops-programme.git`
+2. Install the required dependencies: `pip install -r requirements.txt`
+3. Run the test suite: `pytest`
+
+If you have any questions or need further assistance, don't hesitate to [open an issue](https://github.com/u34-georgi-telerik/devops-programme/issues/new/choose) or reach out to the project maintainers.
+
+We look forward to your contributions and appreciate your involvement in making U34 even better!
