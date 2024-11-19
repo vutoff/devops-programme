@@ -1,6 +1,9 @@
-name: GitHub Actions Demo
-run-name: ${{ github.actor }} is testing out GitHub Actions
-on: [push]
+---
+name: GitHub Actions Homework Demo
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   pre-commit:
@@ -82,7 +85,13 @@ jobs:
           python -m unittest discover -v
 
   docker-build:
-    needs: [pre-commit, editorconfig-check, secrets-check, markdown-check, code-lint, unit-tests]
+    needs:
+      - pre-commit
+      - editorconfig-check
+      - secrets-check
+      - markdown-check
+      - code-lint
+      - unit-tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -98,7 +107,7 @@ jobs:
         with:
           context: .
           push: false
-          tags: |
+          tags: >-
             ${{ secrets.DOCKERHUB_USERNAME }}/u34:${{ github.sha }}
             ${{ secrets.DOCKERHUB_USERNAME }}/u34:latest
 
@@ -135,7 +144,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: |
+          tags: >-
             ${{ secrets.DOCKERHUB_USERNAME }}/u34:${{ github.sha }}
             ${{ secrets.DOCKERHUB_USERNAME }}/u34:latest
 

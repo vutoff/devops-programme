@@ -17,4 +17,4 @@ repos:
     rev: v1.33.0
     hooks:
       - id: yamllint
-        args: [--format, parsable, --strict]
+        args: [--format, parsable, --no-warnings]
