@@ -2,8 +2,7 @@
 
 ## Ansible Task
 
-Create an Ansible playbook that build, push
-and then run the Docker image for the Python
+Create an Ansible playbook that build, push and then run the Docker image for the Python
 application. Let your playbook has the following variables:
 
 * `image_name` - contains the name of your image without the tag, i.e. `vutoff/python-app`
@@ -18,8 +17,7 @@ Use Ansible modules. Do not shell out.
 ### Requirements
 
 * Make sure you have Python installed. Any version above 3.8 would suffice.
-* The `requirements.txt` in this folder contains the required Ansible version.
-* Run
+* The `requirements.txt` file in this directory contains the required Ansible version. Run
 
 ```sh
 pip install -r requirements.txt
@@ -29,8 +27,7 @@ pip install -r requirements.txt
 
 ### Mind the following
 
-* If you're running Docker Desktop or Rancher Desktop, mind the location
-* of the `docker.sock` file. The location of the socket file is
+* If you're running Docker Desktop or Rancher Desktop, mind the location of the `docker.sock` file. The location of the socket file is
   * Docker Desktop - `${HOME}/.docker/run/docker.sock`
   * Rancher DEsktop - ${HOME}/.rd/run/docker.sock
 
