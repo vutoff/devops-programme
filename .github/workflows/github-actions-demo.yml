@@ -142,6 +142,23 @@ jobs:
         with:
           command: test
 
+  docker-compose:
+    needs: docker-build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Docker Compose
+        run: |
+          BASEURL="https://github.com/docker/compose/releases/latest/download"
+          FILENAME="docker-compose-$(uname -s)-$(uname -m)"
+          sudo curl -L "${BASEURL}/${FILENAME}" -o /usr/local/bin/docker-compose
+          sudo chmod +x /usr/local/bin/docker-compose
+      - name: Build and Run Container with Docker Compose
+        run: |
+          docker-compose up -d --build
+          docker-compose ps
+          docker-compose logs
+
   push-to-docker:
     needs:
       - trivy
