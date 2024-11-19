@@ -1,4 +1,4 @@
-# Simple Flask Application 
+# Simple Flask Application
 
 This is a basic Flask application that demonstrates setting up a route and returning a response.
 
@@ -26,8 +26,8 @@ specified by the environment variable PORT (defaulting to 5000).
 
 Deployment:
 
-For production deployment, consider using a WSGI server like Gunicorn. 
-Refer to the Flask documentation for more details on deployment strategies at 
+For production deployment, consider using a WSGI server like Gunicorn.
+Refer to the Flask documentation for more details on deployment strategies at
 flask.palletsprojects.com project
 
 Further Development:

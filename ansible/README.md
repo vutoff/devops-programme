@@ -1,4 +1,4 @@
-# Configuration Management with Ansible 
+# Configuration Management with Ansible
 
 Create an Ansible playbook that build, push and then run the Docker image for the Python
 application. Let your playbook has the following variables:
@@ -12,7 +12,7 @@ in the Ansible playbook that takes its value from `listen_port` variable.
 
 Use Ansible modules. Do not shell out.
 
-### Requirements
+## Requirements
 
 * Make sure you have Python installed. Any version above 3.8 would suffice.
 * The `requirements.txt` file in this directory contains the required Ansible version. Run
@@ -23,11 +23,10 @@ pip install -r requirements.txt
 
 * Make sure that Docker is running on your local machine.
 
-### Mind the following
+## Mind the following
 
-* If you're running Docker Desktop or Rancher Desktop, mind the location of the `docker.sock` file. The location of the socket file is
+* If you're running Docker Desktop, mind the location of the `docker.sock` file. The location of the socket file is
   * Docker Desktop - `${HOME}/.docker/run/docker.sock`
-  * Rancher DEsktop - ${HOME}/.rd/run/docker.sock
 
 * If you're using one of the above, when you write your Ansible playbook you
 must specify the path to the docker socket with the parameter `docker_host`,
