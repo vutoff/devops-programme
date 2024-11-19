@@ -128,6 +128,18 @@ jobs:
           ignore-unfixed: true
           severity: 'CRITICAL'
 
+  snyk:
+    needs: docker-build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run Snyk to check for vulnerabilities
+        uses: snyk/actions/python@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          command: test
+
   push-to-docker:
     needs: trivy
     runs-on: ubuntu-latest
