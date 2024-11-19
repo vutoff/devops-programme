@@ -95,7 +95,7 @@ jobs:
      with:
        args: >
          -Dsonar.projectKey=devops-programme
-         -Dsonar.organization=dimitardd 
+         -Dsonar.organization=dimitardd
 #  CheckSAST:
 #    needs: Pylint
 #    name: SonarCloud
