@@ -55,7 +55,7 @@ jobs:
       - name: Install markdownlint
         run: |
           npm install -g markdownlint-cli
-          echo "::add-path::$(npm bin -g)"
+          echo "$(npm config get prefix)/bin" >> $GITHUB_PATH
       - name: Check markdown files
         run: markdownlint-cli .
 
