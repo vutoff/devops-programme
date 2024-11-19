@@ -95,7 +95,7 @@ jobs:
      with:
        projectBaseDir: app
        args: >
-         -Dsonar.projectKey=devops-programme
+         -Dsonar.projectKey=dimitardd_devops-programme
          -Dsonar.organization=dimitardd
 #  CheckSAST:
 #    needs: Pylint
