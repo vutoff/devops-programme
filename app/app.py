@@ -16,9 +16,9 @@ def hello_world():
     return "Hello, World!"
 
 if __name__ == "__main__":
-    """
-    Entry point for the Flask application.
-    The app runs on the port specified in the environment variable 'PORT'
-    or defaults to 5000 and listens on all interfaces.
-    """
+
+    # Entry point for the Flask application.
+    # The app runs on the port specified in the environment variable 'PORT'
+    # or defaults to 5000 and listens on all interfaces.
+
     app.run(port=os.environ.get("PORT", 5000), host="0.0.0.0")
