@@ -26,9 +26,8 @@ class TestApp(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.data, b"Hello, World!")
 
-
 if __name__ == "__main__":
-    """
-    Entry point for running the unit tests.
-    """
+
+    # Entry point for running the unit tests.
+
     unittest.main()
