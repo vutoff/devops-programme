@@ -1,5 +1,6 @@
 ---
 name: GitHub Actions Homework Demo
+run-name: ${{ github.actor }} is testing out GitHub Actions
 on:
   push:
     branches:
