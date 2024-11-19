@@ -92,7 +92,10 @@ jobs:
      uses: sonarsource/sonarcloud-github-action@master
      env:
        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      
+     with:
+       args: >
+         -Dsonar.projectKey=devops-programme
+         -Dsonar.organization=dimitardd 
 #  CheckSAST:
 #    needs: Pylint
 #    name: SonarCloud
