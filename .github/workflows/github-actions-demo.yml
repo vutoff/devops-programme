@@ -81,27 +81,27 @@ jobs:
        uses: github/codeql-action/upload-sarif@v3
        with:
          sarif_file: 'trivy-output.sarif'
-#  SonarcloudSecurity:
-#    runs-on: ubuntu-latest
-#    needs: UnitTest
-#    steps:
-#    - uses: actions/checkout@v4
-#      with:
-#        fetch-depth: 0
-#    - name: SonarCloud Scan
-#      uses: sonarsource/sonarcloud-github-action@master
-#      env:
-#        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-#      with:
-#        projectBaseDir: app
-#        args: >
-#          -Dsonar.projectKey=dimitardd_devops-programme
-#          -Dsonar.organization=dimitardd
+ SonarcloudSecurity:
+   runs-on: ubuntu-latest
+   needs: UnitTest
+   steps:
+   - uses: actions/checkout@v4
+     with:
+       fetch-depth: 0
+   - name: SonarCloud Scan
+     uses: sonarsource/sonarcloud-github-action@master
+     env:
+       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+     with:
+       projectBaseDir: app
+       args: >
+         -Dsonar.projectKey=dimitardd_devops-programme
+         -Dsonar.organization=dimitardd
  Build-Test:
    name: Build Image and Test
    runs-on: ubuntu-latest
    if: ${{ !cancelled() && !failure() }}
-   needs: [ TrivySecurity, CheckforSecrets ]
+   needs: [ SonarcloudSecurity, TrivySecurity, CheckforSecrets ]
    steps:
       - name: Checkout code
         uses: actions/checkout@v4
