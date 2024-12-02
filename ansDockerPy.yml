@@ -1,0 +1,41 @@
+---
+- name: Build Docker container with my Python app
+  hosts: localhost
+
+  vars: 
+    image_name: "pythonapp"
+    image_tag: "v1"
+    listen_port: 5000
+      #dockerhub_uname: "dxs01"
+  vars_files: 
+    - dockerhubcreds.yml
+    
+  tasks:
+    - name: build docker image
+      docker_image:
+        name: "{{ image_name }}"
+        tag: "{{ image_tag }}"
+        source: build 
+        build:
+          path: "."
+        state: present
+      
+    - name: Dockerhub login
+      shell: docker login -u "{{ docker_uname }}" -p "{{ docker_passwd }}"
+
+    - name: push docker image
+      docker_image:
+        name: "{{ image_name }}"
+        repository: "{{ docker_uname }}/{{ image_name }}"
+        tag: "{{ image_tag }}"
+        push: yes
+        source: local
+        state: present
+    - name: run docker image
+      docker_container:
+        detach: yes
+        name: old_excercise_python_app
+        image: "{{ image_name }}:{{ image_tag }}"
+        state: started
+        published_ports: "{{ listen_port }}:{{ listen_port }}"
+
