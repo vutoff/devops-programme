@@ -36,7 +36,7 @@ jobs:
            "line-lenght": false
           }' > .markdownlint.json
      - name: Markdown lint check
-       run: markdownlint '*/*.md' --ignore node_modules
+       run: markdownlint **/*.md --ignore node_modules
  UnitTest:
     needs: Pylint
     runs-on: ubuntu-latest
