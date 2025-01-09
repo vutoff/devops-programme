@@ -1,5 +1,5 @@
-#devops-programme
-#GitHub Actions Demo
+# devops-programme
+# GitHub Actions Demo
 
 This repository demonstrates a CI/CD pipeline using GitHub Actions. The actions defined in this workflow cover code quality checks, testing, security scanning, and deploying a Docker container to Docker Hub.
 
