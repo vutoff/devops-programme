@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-deployment
+  name: sof-app01
   labels:
-    app: nginx
+    app: sof-app01
 spec:
   replicas: 3
   selector:
