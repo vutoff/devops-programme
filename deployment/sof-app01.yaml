@@ -17,6 +17,6 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: imitardd/dimitar-app02
+          image: dimitardd/dimitar-app02
           ports:
             - containerPort: 80
