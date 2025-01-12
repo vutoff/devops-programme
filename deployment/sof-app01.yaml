@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: sof-app01
+  name: sof-app02
   labels:
-    app: sof-app01
+    app: sof-app02
 spec:
   replicas: 3
   selector:
