@@ -8,7 +8,10 @@ __pycache__/
 
 # terrafomr
 terraform/.terraform
- 
+**/.terraform/*
+terraform/.terraform/lock.hcl
+terrafrom/*/.terraform.lock.hcl
+
 # Distribution / packaging
 .Python
 build/
