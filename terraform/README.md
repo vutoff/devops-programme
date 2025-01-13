@@ -11,7 +11,7 @@ This repository contains Terraform code for deploying ArgoCD and Argo Rollouts u
 
 ## Getting Started
 
-1. **Clone the Repository**: 
+1. **Clone the Repository**:
    Clone this repository to your local machine.
 
    ```bash
@@ -19,32 +19,32 @@ This repository contains Terraform code for deploying ArgoCD and Argo Rollouts u
    cd <repository-directory>
    ```
 
-2. **Configure Kubernetes Context**: 
+2. **Configure Kubernetes Context**:
    Ensure your Kubernetes configuration is set up correctly. The configuration file is expected to be located at `~/.kube/sof-lab03`.
 
-3. **Set Up Terraform Backend**: 
+3. **Set Up Terraform Backend**:
    The Terraform state file will be stored locally at `/Users/dimitar.dimitrov/devops/telerik/terraform.tfstate`. Ensure that this path is accessible.
 
-4. **Required Values Files**: 
+4. **Required Values Files**:
    Make sure that the following values files are present in the `values` directory:
    - `argocd.yaml`
    - `argo-rollouts.yaml`
 
-5. **Initialize Terraform**: 
+5. **Initialize Terraform**:
    Run the following command to initialize Terraform, which will download the necessary providers:
 
    ```bash
    terraform init
    ```
 
-6. **Plan the Deployment**: 
+6. **Plan the Deployment**:
    Generate an execution plan to review the resources that will be created:
 
    ```bash
    terraform plan
    ```
 
-7. **Apply the Configuration**: 
+7. **Apply the Configuration**:
    Apply the Terraform configuration to deploy the Helm charts:
 
    ```bash
@@ -57,13 +57,13 @@ This repository contains Terraform code for deploying ArgoCD and Argo Rollouts u
 
 ### Helm Releases
 
-- **ArgoCD**: 
+- **ArgoCD**:
   - **Name**: `argo-cd-7-1734333419`
   - **Chart**: `argo-cd`
   - **Version**: `7.7.15`
   - **Repository**: [Helm Repository](http://slo-it-nexus01.pt.playtech.corp/repository/helm-argocd)
 
-- **Argo Rollouts**: 
+- **Argo Rollouts**:
   - **Name**: `argo-rollouts`
   - **Chart**: `argo-rollouts`
   - **Version**: `2.38.2`
@@ -76,10 +76,10 @@ This repository contains Terraform code for deploying ArgoCD and Argo Rollouts u
 
 ## Providers
 
-- **Helm**: 
+- **Helm**:
   - Configured to use the Kubernetes config located at `~/.kube/sof-lab03`.
 
-- **Kubernetes**: 
+- **Kubernetes**:
   - Configured to use the Kubernetes config located at `~/.kube/sof-lab03` with the context `sof-lab03`.
 
 ## Cleanup
