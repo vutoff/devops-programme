@@ -7,9 +7,10 @@ __pycache__/
 *.so
 
 # terrafomr
+*.terraform.lock.hcl
 terraform/.terraform
 **/.terraform/*
-terraform/.terraform/lock.hcl
+terraform/.terraform.lock.hcl
 terrafrom/*/.terraform.lock.hcl
 
 # Distribution / packaging
