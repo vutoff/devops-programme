@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: sof-app02
-  namespace: sof-app02
+  name: sof-app01
+  namespace: sof-app01
   labels:
-    app: sof-app02
+    app: sof-app01
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: nginx
+      app: sof-app01
   template:
     metadata:
       labels:
-        app: nginx
+        app: sof-app01
     spec:
       containers:
-        - name: nginx
-          image: dimitardd/dimitar-app02
+        - name: sof-app01
+          image: dimitardd/dimitar-app02:4d8f5c0aba5f446b4822a1b79c561c3e18850cba
           ports:
             - containerPort: 3000
