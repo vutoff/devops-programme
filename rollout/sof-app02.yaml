@@ -2,6 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
   name: sof-app02-rollouts
+  namespace: sof-app02
 spec:
   replicas: 5
   strategy:
@@ -21,7 +22,6 @@ spec:
       app: sof-app02-rollouts
   template:
     metadata:
-      namespace: sof-app02
       labels:
         app: sof-app02-rollouts
     spec:
