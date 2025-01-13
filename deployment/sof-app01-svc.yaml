@@ -1,0 +1,16 @@
+piVersion: v1
+kind: Service
+metadata:
+  name: sof-app01-service
+  namespace: sof-app01
+  labels:
+    app: sof-app01
+spec:
+  selector:
+    app: sof-app01
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+  type: ClusterIP
+
