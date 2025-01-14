@@ -1,5 +1,4 @@
 resource "argocd_application" "sof-app01" {
-  description = "Add Application sof-app01 in ArgoCD"
   metadata {
     name = "sof-app01"
   }
