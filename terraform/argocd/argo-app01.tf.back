@@ -61,4 +61,3 @@ resource "argocd_application" "sof-app01" {
   #      ]
   #  }
 }
-
