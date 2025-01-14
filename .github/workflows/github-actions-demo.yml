@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-      - dimitardd-281024
+#      - dimitardd-281024
 
 env:
   IMAGE_TAG: dimitardd/dimitar-app02

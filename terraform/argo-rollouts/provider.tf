@@ -9,14 +9,8 @@ provider "kubernetes" {
   config_context = "sof-lab03"
 }
 
-resource "kubernetes_namespace" "sof-app01" {
-  metadata {
-    name = "sof-app01"
-  }
-}
-
 terraform {
   backend "local" {
-    path = "/Users/dimitar.dimitrov/devops/telerik/terraform.tfstate"
+    path = "~/devops/telerik/terraform-argo-rollouts.tfstate"
   }
 }

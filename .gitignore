@@ -12,6 +12,8 @@ terraform/.terraform
 **/.terraform/*
 terraform/.terraform.lock.hcl
 terrafrom/*/.terraform.lock.hcl
+terraform/**/*/.terraform.lock.hcl
+terrafrom/**/.terraform.lock.hcl
 
 # Distribution / packaging
 .Python

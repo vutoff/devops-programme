@@ -14,14 +14,6 @@ resource "argocd_application" "sof-app01" {
       repo_url        = "https://github.com/dimitardd/devops-programme"
       path            = "deployment"
       target_revision = "dimitardd-281024"
-      kustomize {
-        name_prefix = "foo-"
-        name_suffix = "-bar"
-        images      = ["hashicorp/terraform:light"]
-        common_labels = {
-          "this.is.a.common" = "la-bel"
-          "another.io/one"   = "true"
-        }
       }
     }
 
@@ -69,5 +61,3 @@ resource "argocd_application" "sof-app01" {
     #      ]
   }
 }
-#}
-
