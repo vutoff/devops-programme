@@ -5,6 +5,6 @@ provider "kubernetes" {
 
 terraform {
   backend "local" {
-    path = "~/devops/telerik/terraform-kubernetes.tfstate"
+    path = "/Users/dimitar.dimitrov/devops/telerik/terraform-kubernetes.tfstate"
   }
 }

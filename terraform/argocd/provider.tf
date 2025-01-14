@@ -11,7 +11,7 @@ provider "kubernetes" {
 
 terraform {
   backend "local" {
-    path = "~/devops/telerik/terraform-argocd.tfstate"
+    path = "/Users/dimitar.dimitrov/devops/telerik/terraform-argocd.tfstate"
   }
 }
 
