@@ -32,7 +32,4 @@ spec:
         - name: 3000app02
           containerPort: 3000
           protocol: TCP
-        resources:
-          requests:
-            memory: 32Mi
-            cpu: 5m
+
