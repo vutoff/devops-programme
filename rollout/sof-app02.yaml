@@ -1,8 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
-  name: sof-app02-rollouts
-  namespace: sof-app02
+  name: rollouts-demo
 spec:
   replicas: 5
   strategy:
@@ -19,17 +18,20 @@ spec:
   revisionHistoryLimit: 2
   selector:
     matchLabels:
-      app: sof-app02-rollouts
+      app: rollouts-demo
   template:
     metadata:
       labels:
-        app: sof-app02-rollouts
+        app: rollouts-demo
     spec:
       containers:
-      - name: sof-app02
+      - name: rollouts-demo
         image: dimitardd/dimitar-app02:4fb3e4a57b0eb02324905c3cd293a83754a32057
         ports:
-        - name: 3000app02
+        - name: http
           containerPort: 3000
           protocol: TCP
-
+        resources:
+          requests:
+            memory: 32Mi
+            cpu: 5m
