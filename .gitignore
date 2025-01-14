@@ -14,6 +14,7 @@ terraform/.terraform.lock.hcl
 terrafrom/*/.terraform.lock.hcl
 terraform/**/*/.terraform.lock.hcl
 terrafrom/**/.terraform.lock.hcl
+terrafrom/kubernetes/~/
 
 # Distribution / packaging
 .Python
