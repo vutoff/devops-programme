@@ -1,4 +1,5 @@
 resource "helm_release" "argocd" {
+  destination = "Deplay ArgoCD"
   name = "argo-cd-7-1734333419"
 
   repository       = "http://slo-it-nexus01.pt.playtech.corp/repository/helm-argocd"

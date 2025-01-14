@@ -1,4 +1,5 @@
 resource "helm_release" "argo-rollouts" {
+  description = "Deplayte Argo Rollouts"
   name = "argo-rollouts"
 
   repository       = "http://slo-it-nexus01.pt.playtech.corp/repository/helm-argocd"
