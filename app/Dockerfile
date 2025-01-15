@@ -11,7 +11,7 @@ RUN apt-get update -y && \
 	groupadd -r appgroup && \	
 	useradd -r -g appgroup appuser
 
-WORKDIR /app
+#WORKDIR /app
 
 COPY --chown=appuser:appgroup --chmod=755 ./app .
 
