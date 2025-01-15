@@ -17,7 +17,7 @@ spec:
             name: sof-app01-service
             port:
               number: 3000
-tls:
-  - hosts:
-      - sof-app01.pt.playtech.corp
-    secretName: sof-app01-tls
+  tls:
+    - hosts:
+        - sof-app01.pt.playtech.corp
+      secretName: sof-app01-tls
