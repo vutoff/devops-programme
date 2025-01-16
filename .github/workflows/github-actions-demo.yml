@@ -153,9 +153,14 @@ jobs:
      - name: Update sof-app01 deployment image
        run: |
          sudo apt-get install yq -y
+         echo $GITHUB_WORKSPACE
+         echo $github.sha
          IMAGE_TAG=$(echo $github.sha)
+         echo "cd to hithub_workspace"
          cd $GITHUB_WORKSPACE
+         echo "Github workspace"
          ls -la $GITHUB_WORKSPACE
+         echo "PWD command"
          pwd
          yq eval ".spec.template.spec.containers[0].image = \"dimitardd/dimitar-app02:${IMAGE_TAG}\"" -i deployment/sof-app01.yaml
          git config --local user.email "dhd.dimitrov@gmail.com"
