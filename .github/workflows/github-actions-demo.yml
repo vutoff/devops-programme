@@ -166,7 +166,7 @@ jobs:
          echo "==============="
          echo "Github workspace"
          ls -la $GITHUB_WORKSPACE
-         echo "==============="
+         echo "===================="
          echo "PWD command"
          pwd
          echo "==============="
