@@ -125,28 +125,28 @@ jobs:
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: 'trivy-results-container.sarif'
-#  UploadtoDockerHub:
-#    name: Push container to docker hub
-#    runs-on: ubuntu-latest
-#    if: ${{ !cancelled() && !failure() }}
-#    needs: [ Build-Test ]
-#    steps:
-#      - name: Login to Docker Hub
-#        uses: docker/login-action@v3
-#        with:
-#          username: ${{ secrets.DOCKERHUB_USERNAME }}
-#          password: ${{ secrets.DOCKERHUB_TOKEN }}
-#      - name: Push
-#        uses: docker/build-push-action@v6
-#        with:
-#          push: true
-#          tags: '${{ env.IMAGE_TAG }}:${{ github.sha }}'
-#        if: success()  # Only push if get login is ok
+ UploadtoDockerHub:
+   name: Push container to docker hub
+   runs-on: ubuntu-latest
+   if: ${{ !cancelled() && !failure() }}
+   needs: [ Build-Test ]
+   steps:
+     - name: Login to Docker Hub
+       uses: docker/login-action@v3
+       with:
+         username: ${{ secrets.DOCKERHUB_USERNAME }}
+         password: ${{ secrets.DOCKERHUB_TOKEN }}
+     - name: Push
+       uses: docker/build-push-action@v6
+       with:
+         push: true
+         tags: '${{ env.IMAGE_TAG }}:${{ github.sha }}'
+       if: success()  # Only push if get login is ok
  PushforArgoCD:
    name: Update deplayment for ArgoCD
    runs-on: ubuntu-latest
    if: ${{ !cancelled() && !failure() }}
-   needs: Build-Test #[ UploadtoDockerHub ]
+   needs: [ UploadtoDockerHub ]
    steps:
      - name: Checkout code
        uses: actions/checkout@v2
@@ -157,7 +157,7 @@ jobs:
          echo $GITHUB_WORKSPACE
          echo $github.sha
          echo "==============="
-         IMAGE_NEWTAG=$(echo $github.sha)
+         IMAGE_NEWTAG=$(echo ${{ github.sha }})
          echo "IMAGE_NEWTAG"
          echo $IMAGE_NEWTAG
          echo "==============="
