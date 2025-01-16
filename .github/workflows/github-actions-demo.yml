@@ -152,7 +152,7 @@ jobs:
        uses: actions/checkout@v2
      - name: Update sof-app01 deployment image
        run: |
-         apt-get install yq
+         sudo apt-get install yq -y
          IMAGE_TAG=$(echo $github.sha)
          yq eval ".spec.template.spec.containers[0].image = \"deployment/dimitardd/dimitar-app02:${IMAGE_TAG}\"" -i deployment/sof-app01.yaml
          git config --local user.email "dhd.dimitrov@gmail.com"
