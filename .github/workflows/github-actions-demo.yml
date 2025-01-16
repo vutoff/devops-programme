@@ -173,7 +173,9 @@ jobs:
          echo "Github workspace/deploymen"
          ls -la $GITHUB_WORKSPACE/deployment
          echo "==============="
-         yq eval ".spec.template.spec.containers[0].image = \"dimitardd/dimitar-app02:${IMAGE_NEWTAG}\"" -i $GITHUB_WORKSPACE/deployment/sof-app01.yaml
+         cd $GITHUB_WORKSPACE
+         whereis yq
+         yq eval ".spec.template.spec.containers[0].image = \"dimitardd/dimitar-app02:${IMAGE_NEWTAG}\"" -i deployment/sof-app01.yaml
          git config --local user.email "dhd.dimitrov@gmail.com"
          git config --local user.name "Dimitar Dimitrov"
          git add $GITHUB_WORKSPACE/deployment/sof-app01.yaml
