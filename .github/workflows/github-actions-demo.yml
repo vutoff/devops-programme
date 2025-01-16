@@ -125,28 +125,28 @@ jobs:
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: 'trivy-results-container.sarif'
- UploadtoDockerHub:
-   name: Push container to docker hub
-   runs-on: ubuntu-latest
-   if: ${{ !cancelled() && !failure() }}
-   needs: [ Build-Test ]
-   steps:
-     - name: Login to Docker Hub
-       uses: docker/login-action@v3
-       with:
-         username: ${{ secrets.DOCKERHUB_USERNAME }}
-         password: ${{ secrets.DOCKERHUB_TOKEN }}
-     - name: Push
-       uses: docker/build-push-action@v6
-       with:
-         push: true
-         tags: '${{ env.IMAGE_TAG }}:${{ github.sha }}'
-       if: success()  # Only push if get login is ok
+#  UploadtoDockerHub:
+#    name: Push container to docker hub
+#    runs-on: ubuntu-latest
+#    if: ${{ !cancelled() && !failure() }}
+#    needs: [ Build-Test ]
+#    steps:
+#      - name: Login to Docker Hub
+#        uses: docker/login-action@v3
+#        with:
+#          username: ${{ secrets.DOCKERHUB_USERNAME }}
+#          password: ${{ secrets.DOCKERHUB_TOKEN }}
+#      - name: Push
+#        uses: docker/build-push-action@v6
+#        with:
+#          push: true
+#          tags: '${{ env.IMAGE_TAG }}:${{ github.sha }}'
+#        if: success()  # Only push if get login is ok
  PushforArgoCD:
    name: Update deplayment for ArgoCD
    runs-on: ubuntu-latest
    if: ${{ !cancelled() && !failure() }}
-   needs: [ UploadtoDockerHub ]
+   needs: Build-Test #[ UploadtoDockerHub ]
    steps:
      - name: Checkout code
        uses: actions/checkout@v2
@@ -154,10 +154,10 @@ jobs:
        run: |
          sudo apt-get install yq -y
          IMAGE_TAG=$(echo $github.sha)
-         cd $GITHUB_WORKSPACE/deployment/
+         cd $GITHUB_WORKSPACE
          ls -la $GITHUB_WORKSPACE
          pwd
-         yq eval ".spec.template.spec.containers[0].image = \"dimitardd/dimitar-app02:${IMAGE_TAG}\"" -i sof-app01.yaml
+         yq eval ".spec.template.spec.containers[0].image = \"dimitardd/dimitar-app02:${IMAGE_TAG}\"" -i deployment/sof-app01.yaml
          git config --local user.email "dhd.dimitrov@gmail.com"
          git config --local user.name "Dimitar Dimitrov"
          git add deployment/sof-app01.yaml
