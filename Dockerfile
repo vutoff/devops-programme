@@ -16,7 +16,7 @@ WORKDIR /app
 COPY --chown=appuser:appgroup --chmod=755 ./app .
 
 RUN pip3 install flask==3.0.0 && \
-    pip install prometheus_flask_exporter
+    pip3 install prometheus_flask_exporter
 
 USER appuser
 
