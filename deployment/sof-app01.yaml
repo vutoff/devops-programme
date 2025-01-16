@@ -18,8 +18,8 @@ spec:
       containers:
         - name: sof-app01
 #          image: dimitardd/dimitar-app02:b07c7bf5c0df29652dd1c86ec06463770388fb98 #Auto deplayed from build
-#          image: 'dimitardd/dimitar-app02:b07c7bf5c0df29652dd1c86ec06463770388fb98 #Green
-          image: dimitardd/dimitar-app02:57bb7e9bcd3546159be0917df7e87526d8170140  #Blue 
+          image: dimitardd/dimitar-app02:b07c7bf5c0df29652dd1c86ec06463770388fb98 #Green
+#          image: dimitardd/dimitar-app02:57bb7e9bcd3546159be0917df7e87526d8170140  #Blue 
           ports:
             - containerPort: 3000
           resources:
