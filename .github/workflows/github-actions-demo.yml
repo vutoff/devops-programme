@@ -5,10 +5,10 @@ on:
     paths-ignore:
       - 'deployment/*'
       - 'terraform/*'
+      - 'rollout/*'
     branches:
       - main
       - dimitardd-281024
-
 env:
   IMAGE_TAG: dimitardd/dimitar-app02
 jobs:
@@ -154,6 +154,7 @@ jobs:
        run: |
          sudo snap install yq
          sudo apt-get install git -y
+         IMAGE_NEWTAG=$(echo ${{ github.sha }})
          /usr/bin/yq eval ".spec.template.spec.containers[0].image = \"dimitardd/dimitar-app02:${IMAGE_NEWTAG}\"" -i deployment/sof-app01.yaml
          git config --local user.email "dhd.dimitrov@gmail.com"
          git config --local user.name "Dimitar Dimitrov"
