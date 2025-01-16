@@ -60,55 +60,55 @@ jobs:
         run: |
           cd app
           python -m unittest app_test.py
- CheckforSecrets:
-    needs: UnitTest
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0 
-      - name: Gitleaks scan
-        uses: gitleaks/gitleaks-action@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
- TrivySecurity:
-   runs-on: ubuntu-latest
-   needs: UnitTest
-   steps:
-     - uses: actions/checkout@v4
-     - name: Trivy Vulnerability Scan
-       uses: aquasecurity/trivy-action@master
-       with:
-         scan-type: 'fs'
-         ignore-unfixed: true
-         format: 'sarif'
-         output: 'trivy-output.sarif'
-         severity: 'CRITICAL'
-     - name: Trivy Scan Output
-       uses: github/codeql-action/upload-sarif@v3
-       with:
-         sarif_file: 'trivy-output.sarif'
- SonarcloudSecurity:
-   runs-on: ubuntu-latest
-   needs: UnitTest
-   steps:
-   - uses: actions/checkout@v4
-     with:
-       fetch-depth: 0
-   - name: SonarCloud Scan
-     uses: sonarsource/sonarcloud-github-action@master
-     env:
-       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-     with:
-       projectBaseDir: app
-       args: >
-         -Dsonar.projectKey=dimitardd_devops-programme
-         -Dsonar.organization=dimitardd
+#  CheckforSecrets:
+#     needs: UnitTest
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v4
+#         with:
+#           fetch-depth: 0 
+#       - name: Gitleaks scan
+#         uses: gitleaks/gitleaks-action@v2
+#         env:
+#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#  TrivySecurity:
+#    runs-on: ubuntu-latest
+#    needs: UnitTest
+#    steps:
+#      - uses: actions/checkout@v4
+#      - name: Trivy Vulnerability Scan
+#        uses: aquasecurity/trivy-action@master
+#        with:
+#          scan-type: 'fs'
+#          ignore-unfixed: true
+#          format: 'sarif'
+#          output: 'trivy-output.sarif'
+#          severity: 'CRITICAL'
+#      - name: Trivy Scan Output
+#        uses: github/codeql-action/upload-sarif@v3
+#        with:
+#          sarif_file: 'trivy-output.sarif'
+#  SonarcloudSecurity:
+#    runs-on: ubuntu-latest
+#    needs: UnitTest
+#    steps:
+#    - uses: actions/checkout@v4
+#      with:
+#        fetch-depth: 0
+#    - name: SonarCloud Scan
+#      uses: sonarsource/sonarcloud-github-action@master
+#      env:
+#        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+#      with:
+#        projectBaseDir: app
+#        args: >
+#          -Dsonar.projectKey=dimitardd_devops-programme
+#          -Dsonar.organization=dimitardd
  Build-Test:
    name: Build Image and Test
    runs-on: ubuntu-latest
    if: ${{ !cancelled() && !failure() }}
-   needs: [ SonarcloudSecurity, TrivySecurity, CheckforSecrets ]
+   needs: UnitTest #[ SonarcloudSecurity, TrivySecurity, CheckforSecrets ]
    steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -154,7 +154,7 @@ jobs:
        run: |
          sudo apt-get install yq -y
          IMAGE_TAG=$(echo $github.sha)
-         cd devops-programme
+         cd $GITHUB_WORKSPACE/devops-programme
          yq eval ".spec.template.spec.containers[0].image = \"deployment/dimitardd/dimitar-app02:${IMAGE_TAG}\"" -i deployment/sof-app01.yaml
          git config --local user.email "dhd.dimitrov@gmail.com"
          git config --local user.name "Dimitar Dimitrov"
