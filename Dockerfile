@@ -6,9 +6,10 @@ LABEL version="4.19"
 RUN apt-get update -y && \
 	apt-get install -y --no-install-recommends \
 	python3 \
+	prometheus_flask_exporter \
 	python3-pip && \
 	apt-get clean && \
-	groupadd -r appgroup && \	
+	groupadd -r appgroup && \
 	useradd -r -g appgroup appuser
 
 WORKDIR /app
