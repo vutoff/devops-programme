@@ -176,6 +176,7 @@ jobs:
          cd $GITHUB_WORKSPACE
          whereis yq
          cat deployment/sof-app01.yaml
+         yq eval deployment/sof-app01.yaml
          yq eval ".spec.template.spec.containers[0].image = \"dimitardd/dimitar-app02:${IMAGE_NEWTAG}\"" -i deployment/sof-app01.yaml
          git config --local user.email "dhd.dimitrov@gmail.com"
          git config --local user.name "Dimitar Dimitrov"
