@@ -152,32 +152,9 @@ jobs:
        uses: actions/checkout@v2
      - name: Update sof-app01 deployment image
        run: |
-         sudo apt-get install yq -y
+         #sudo apt-get install yq -y
+         sudo snap install yq
          sudo apt-get install jq -y
-         echo "==============="
-         echo $GITHUB_WORKSPACE
-         echo $github.sha
-         echo "==============="
-         IMAGE_NEWTAG=$(echo ${{ github.sha }})
-         echo "IMAGE_NEWTAG"
-         echo $IMAGE_NEWTAG
-         echo "==============="
-         echo "cd to hithub_workspace"
-         cd $GITHUB_WORKSPACE
-         echo "==============="
-         echo "Github workspace"
-         ls -la $GITHUB_WORKSPACE
-         echo "================"
-         echo "PWD command"
-         pwd
-         echo "==============="
-         echo "Github workspace/deploymen"
-         ls -la $GITHUB_WORKSPACE/deployment
-         echo "==============="
-         cd $GITHUB_WORKSPACE/deployment/
-         whereis yq
-         cat sof-app01.yaml
-         cat $GITHUB_WORKSPACE/deployment/sof-app01.yaml
          /usr/bin/yq eval $GITHUB_WORKSPACE/deployment/sof-app01.yaml
          /usr/bin/yq eval ".spec.template.spec.containers[0].image = \"dimitardd/dimitar-app02:${IMAGE_NEWTAG}\"" -i deployment/sof-app01.yaml
          git config --local user.email "dhd.dimitrov@gmail.com"
