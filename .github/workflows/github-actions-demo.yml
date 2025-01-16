@@ -153,21 +153,30 @@ jobs:
      - name: Update sof-app01 deployment image
        run: |
          sudo apt-get install yq -y
+         echo "==============="
          echo $GITHUB_WORKSPACE
          echo $github.sha
-         IMAGE_TAG=$(echo $github.sha)
+         echo "==============="
+         IMAGE_NEWTAG=$(echo $github.sha)
+         echo "IMAGE_NEWTAG"
+         echo $IMAGE_NEWTAG
+         echo "==============="
          echo "cd to hithub_workspace"
          cd $GITHUB_WORKSPACE
+         echo "==============="
          echo "Github workspace"
          ls -la $GITHUB_WORKSPACE
+         echo "==============="
          echo "PWD command"
          pwd
+         echo "==============="
          echo "Github workspace/deploymen"
          ls -la $GITHUB_WORKSPACE/deployment
-         yq eval ".spec.template.spec.containers[0].image = \"dimitardd/dimitar-app02:${IMAGE_TAG}\"" -i $GITHUB_WORKSPACE/deployment/sof-app01.yaml
+         echo "==============="
+         yq eval ".spec.template.spec.containers[0].image = \"dimitardd/dimitar-app02:${IMAGE_NEWTAG}\"" -i $GITHUB_WORKSPACE/deployment/sof-app01.yaml
          git config --local user.email "dhd.dimitrov@gmail.com"
          git config --local user.name "Dimitar Dimitrov"
-         git add deployment/sof-app01.yaml
+         git add $GITHUB_WORKSPACE/deployment/sof-app01.yaml
          git commit -m "Update image to ${{ github.sha }}"
          git push origin main
        env:
