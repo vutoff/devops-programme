@@ -152,16 +152,14 @@ jobs:
        uses: actions/checkout@v2
      - name: Update sof-app01 deployment image
        run: |
-         #sudo apt-get install yq -y
          sudo snap install yq
-         sudo apt-get install jq -y
-         /usr/bin/yq eval $GITHUB_WORKSPACE/deployment/sof-app01.yaml
+         apt-get install git -y
          /usr/bin/yq eval ".spec.template.spec.containers[0].image = \"dimitardd/dimitar-app02:${IMAGE_NEWTAG}\"" -i deployment/sof-app01.yaml
          git config --local user.email "dhd.dimitrov@gmail.com"
          git config --local user.name "Dimitar Dimitrov"
          git add $GITHUB_WORKSPACE/deployment/sof-app01.yaml
          git commit -m "Update image to ${{ github.sha }}"
-         git push origin main
+         git push origin dimitardd-281024
        env:
          github_token: ${{ secrets.GIT_TOKEN }}
          GITHUB_SHA: ${{ github.sha }}
