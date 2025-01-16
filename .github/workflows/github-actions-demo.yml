@@ -2,6 +2,9 @@ name: GitHub Actions Demo
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on:
   push:
+    paths-ignore:
+      - 'deployment/*'
+      - 'terraform/*'
     branches:
       - main
       - dimitardd-281024
@@ -122,7 +125,7 @@ jobs:
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: 'trivy-results-container.sarif'
- Deploy:
+ UploadtoDockerHub:
    name: Push container to docker hub
    runs-on: ubuntu-latest
    if: ${{ !cancelled() && !failure() }}
@@ -139,3 +142,24 @@ jobs:
          push: true
          tags: '${{ env.IMAGE_TAG }}:${{ github.sha }}'
        if: success()  # Only push if get login is ok
+ PushforArgoCD:
+   name: Update deplayment for ArgoCD
+   runs-on: ubuntu-latest
+   if: ${{ !cancelled() && !failure() }}
+   needs: [ UploadtoDockerHub ]
+   steps:
+     - name: Checkout code
+       uses: actions/checkout@v2
+     - name: Update sof-app01 deployment image
+       run: |
+         apt-get install yq
+         IMAGE_TAG=$(echo $github.sha)
+         yq eval ".spec.template.spec.containers[0].image = \"deployment/dimitardd/dimitar-app02:${IMAGE_TAG}\"" -i deployment/sof-app01.yaml
+         git config --local user.email "dhd.dimitrov@gmail.com"
+         git config --local user.name "Dimitar Dimitrov"
+         git add deployment/sof-app01.yaml
+         git commit -m "Update image to ${{ github.sha }}"
+         git push origin main
+       env:
+         github_token: ${{ secrets.GIT_TOKEN }}
+         GITHUB_SHA: ${{ github.sha }}

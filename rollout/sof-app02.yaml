@@ -26,8 +26,8 @@ spec:
     spec:
       containers:
       - name: sof-app02
-#        image: dimitardd/dimitar-app02:4fb3e4a57b0eb02324905c3cd293a83754a32057
-        image: dimitardd/dimitar-app02:4d8f5c0aba5f446b4822a1b79c561c3e18850cba
+        image: dimitardd/dimitar-app02:4d8f5c0aba5f446b4822a1b79c561c3e18850cba  #Green
+#        image: dimitardd/dimitar-app02:4fb3e4a57b0eb02324905c3cd293a83754a32057 #Blue 
         ports:
         - name: http
           containerPort: 3000
