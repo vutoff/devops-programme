@@ -1,12 +1,11 @@
 FROM ubuntu:22.04
 
 LABEL maintainer="dhd.dimitrov@gmail.com"
-LABEL version="4.19"
+LABEL version="5.0"
 
 RUN apt-get update -y && \
 	apt-get install -y --no-install-recommends \
 	python3 \
-	prometheus_flask_exporter \
 	python3-pip && \
 	apt-get clean && \
 	groupadd -r appgroup && \
@@ -16,7 +15,8 @@ WORKDIR /app
 
 COPY --chown=appuser:appgroup --chmod=755 ./app .
 
-RUN pip3 install flask==3.0.0
+RUN pip3 install flask==3.0.0 && \
+    pip install prometheus_flask_exporter
 
 USER appuser
 
