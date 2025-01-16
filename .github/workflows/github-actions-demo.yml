@@ -162,7 +162,9 @@ jobs:
          ls -la $GITHUB_WORKSPACE
          echo "PWD command"
          pwd
-         yq eval ".spec.template.spec.containers[0].image = \"dimitardd/dimitar-app02:${IMAGE_TAG}\"" -i deployment/sof-app01.yaml
+         echo "Github workspace/deploymen"
+         ls -la $GITHUB_WORKSPACE/deployment
+         yq eval ".spec.template.spec.containers[0].image = \"dimitardd/dimitar-app02:${IMAGE_TAG}\"" -i $GITHUB_WORKSPACE/deployment/sof-app01.yaml
          git config --local user.email "dhd.dimitrov@gmail.com"
          git config --local user.name "Dimitar Dimitrov"
          git add deployment/sof-app01.yaml
