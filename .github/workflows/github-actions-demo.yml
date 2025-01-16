@@ -154,7 +154,7 @@ jobs:
        run: |
          sudo apt-get install yq -y
          IMAGE_TAG=$(echo $github.sha)
-         cd $GITHUB_WORKSPACE/devops-programme
+         cd $GITHUB_WORKSPACE
          yq eval ".spec.template.spec.containers[0].image = \"deployment/dimitardd/dimitar-app02:${IMAGE_TAG}\"" -i deployment/sof-app01.yaml
          git config --local user.email "dhd.dimitrov@gmail.com"
          git config --local user.name "Dimitar Dimitrov"
