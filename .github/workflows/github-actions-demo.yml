@@ -43,7 +43,7 @@ jobs:
            "line-lenght": false
           }' > .markdownlint.json
      - name: Markdown lint check
-       run: markdownlint **/*.md --ignore node_modules
+       run: markdownlint -i '{**/*.md}' -i '{terraform/*.md}' -i '{*.md}' -i node_modules
  UnitTest:
     needs: Pylint
     runs-on: ubuntu-latest
