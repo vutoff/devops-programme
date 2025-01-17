@@ -19,7 +19,7 @@ spec:
         - name: sof-app01
           #          image: dimitardd/dimitar-app02:e0b1dc1bb0edf9e161d17d7ba1565844b64e8e37 #Auto deplayed from build
           #          image: dimitardd/dimitar-app02:b07c7bf5c0df29652dd1c86ec06463770388fb98 #Green
-          image: dimitardd/dimitar-app02:29120b7605e4f216cd172e5b0131b7ef9a02e580 #Blue
+          image: dimitardd/dimitar-app02:207e179a46ce047db5ac0d73ec2a1b0fb9352514 #Blue
           #          image: dimitardd/dimitar-app01:e0b1dc1bb0edf9e161d17d7ba1565844b64e8e37  #Yellow
           ports:
             - containerPort: 3000
