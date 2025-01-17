@@ -14,10 +14,10 @@ This repository contains Terraform code for deploying ArgoCD and Argo Rollouts u
 1. **Clone the Repository**:
    Clone this repository to your local machine.
 
-   ```bash
-   git clone <repository-url>
-   cd <repository-directory>
-   ```
+
+   git clone https://github.com/dimitardd/devops-programme.git
+   cd devops-programme
+
 
 2. **Configure Kubernetes Context**:
    Ensure your Kubernetes configuration is set up correctly. The configuration file is expected to be located at `~/.kube/sof-lab03`.
@@ -33,23 +33,21 @@ This repository contains Terraform code for deploying ArgoCD and Argo Rollouts u
 5. **Initialize Terraform**:
    Run the following command to initialize Terraform, which will download the necessary providers:
 
-   ```bash
    terraform init
-   ```
 
 6. **Plan the Deployment**:
    Generate an execution plan to review the resources that will be created:
 
-   ```bash
+
    terraform plan
-   ```
+
 
 7. **Apply the Configuration**:
    Apply the Terraform configuration to deploy the Helm charts:
 
-   ```bash
+
    terraform apply
-   ```
+
 
    Confirm the action when prompted.
 
@@ -86,9 +84,8 @@ This repository contains Terraform code for deploying ArgoCD and Argo Rollouts u
 
 To remove the deployed resources, you can run:
 
-```bash
+
 terraform destroy
-```
 
 ## License
 
