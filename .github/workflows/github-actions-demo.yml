@@ -6,6 +6,11 @@ on:
       - 'deployment/*'
       - 'terraform/*'
       - 'rollout/*'
+      - '.pre-commit-config.yaml'
+      - '.gitignore'
+      - '.editorconfig'
+      - '*.md'
+      - 'LICENSE'
     branches:
       - main
       - dimitardd-281024
@@ -66,7 +71,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0 
+          fetch-depth: 0
       - name: Gitleaks scan
         uses: gitleaks/gitleaks-action@v2
         env:
