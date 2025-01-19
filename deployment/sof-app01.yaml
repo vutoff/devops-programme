@@ -15,6 +15,7 @@ spec:
       labels:
         app: sof-app01
     spec:
+      serviceAccountName: sof-app01-sa
       containers:
         - name: sof-app01
           #          image: dimitardd/dimitar-app02:e0b1dc1bb0edf9e161d17d7ba1565844b64e8e37 #Auto deplayed from build
