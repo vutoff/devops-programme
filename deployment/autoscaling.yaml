@@ -1,7 +1,7 @@
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: sof-app01
+  name: sof-app01-hpa
   namespace: sof-app01
 spec:
   scaleTargetRef:
