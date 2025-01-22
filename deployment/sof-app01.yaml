@@ -18,9 +18,9 @@ spec:
       serviceAccountName: sof-app01-sa
       containers:
         - name: sof-app01
-          #          image: dimitardd/dimitar-app02:e0b1dc1bb0edf9e161d17d7ba1565844b64e8e37 #Auto deplayed from build
+          image: dimitardd/dimitar-app02:e0b1dc1bb0edf9e161d17d7ba1565844b64e8e37 #Auto deplayed from build
           #          image: dimitardd/dimitar-app02:b07c7bf5c0df29652dd1c86ec06463770388fb98 #Green
-          image: dimitardd/dimitar-app02:207e179a46ce047db5ac0d73ec2a1b0fb9352514 #Blue
+          #          image: dimitardd/dimitar-app02:207e179a46ce047db5ac0d73ec2a1b0fb9352514 #Blue
           #          image: dimitardd/dimitar-app01:e0b1dc1bb0edf9e161d17d7ba1565844b64e8e37  #Yellow
           ports:
             - containerPort: 3000

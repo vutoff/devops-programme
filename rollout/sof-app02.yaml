@@ -9,6 +9,9 @@ spec:
       steps:
       - setWeight: 20
       - pause: {}
+        #      - analysis:
+         # templateName: sof-app02-analysis
+         # arguments: {}
       - setWeight: 40
       - pause: {duration: 10}
       - setWeight: 60
@@ -23,12 +26,13 @@ spec:
     metadata:
       labels:
         app: sof-app02
+        #        rollouts-pod-template-hash: e0b1dc1bb0edf9e161d17d7ba1565844b64e8e37
     spec:
       containers:
       - name: sof-app02
 #        image: dimitardd/dimitar-app02:b07c7bf5c0df29652dd1c86ec06463770388fb98  #Green
-        image: dimitardd/dimitar-app02:57bb7e9bcd3546159be0917df7e87526d8170140 #Blue
-#       image: dimitardd/dimitar-app01:e0b1dc1bb0edf9e161d17d7ba1565844b64e8e37  #Yellow
+#        image: dimitardd/dimitar-app02:57bb7e9bcd3546159be0917df7e87526d8170140 #Blue
+        image: dimitardd/dimitar-app01:e0b1dc1bb0edf9e161d17d7ba1565844b64e8e37  #Fresh
         ports:
         - name: http
           containerPort: 3000
@@ -37,3 +41,4 @@ spec:
           requests:
             memory: 32Mi
             cpu: 5m
+
