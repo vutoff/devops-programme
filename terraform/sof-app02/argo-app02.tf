@@ -1,6 +1,6 @@
-resource "argocd_application" "sof-app01" {
+resource "argocd_application" "sof-app02" {
   metadata {
-    name = "sof-app01"
+    name = "sof-app02"
   }
 
   spec {
@@ -10,7 +10,7 @@ resource "argocd_application" "sof-app01" {
       sync_options = ["Validate=true"]
 
       retry {
-        limit = "5"
+        limit = "2"
 
         backoff {
           duration     = "5s"
@@ -26,12 +26,12 @@ resource "argocd_application" "sof-app01" {
     }
     destination {
       server    = "https://kubernetes.default.svc"
-      namespace = "sof-app01"
+      namespace = "sof-app02"
     }
 
     source {
       repo_url        = "https://github.com/dimitardd/devops-programme"
-      path            = "deployment"
+      path            = "rollout"
       target_revision = "main"
       # Uncomment and add if required:
       # repo            = "https://github.com/dimitardd/devops-programme"
