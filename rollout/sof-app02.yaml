@@ -2,6 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
   name: sof-app02
+  namespace: sof-app02
 spec:
   replicas: 5
   strategy:
@@ -10,8 +11,8 @@ spec:
       - setWeight: 20
       - pause: {}
         #      - analysis:
-         # templateName: sof-app02-analysis
-         # arguments: {}
+          #  template: sof-app02-analysis
+          # arguments: {}
       - setWeight: 40
       - pause: {duration: 10}
       - setWeight: 60
@@ -26,7 +27,11 @@ spec:
     metadata:
       labels:
         app: sof-app02
-        rollouts-pod-template-hash: e0b1dc1bb0edf9e161d17d7ba1565844b64e8e37 #pragma: allowlist secret
+      metadata:
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/path: /metrics
+        prometheus.io/port: "3000"
     spec:
       containers:
       - name: sof-app02

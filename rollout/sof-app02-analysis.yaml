@@ -2,6 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: AnalysisTemplate
 metadata:
   name: sof-app02-analysis
+  namespace: sof-app02
 spec:
   metrics:
     - name: status-check
@@ -9,5 +10,6 @@ spec:
       provider:
         prometheus:
           address: http://sof-p01.pt.playtech.corp
-          query: sum(rate(flask_http_request_total{ob="sof-app02", method="GET", status="200"}[1m])) by (status)
+          query: |
+            sum(rate(flask_http_request_total{status="200"}[5m])) > 0
 

@@ -2,6 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: sof-app02
+  namespace: sof-app02
   annotations:
     kubernetes.io/ingress.class: "nginx"
 spec:
