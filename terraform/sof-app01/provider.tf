@@ -27,8 +27,8 @@ provider "argocd" {
   password    = var.password
 }
 
-terraform {
-  backend "local" {
-    path = "/Users/dimitar.dimitrov/devops/telerik/terraform-argocd-sof-app01.tfstate"
-  }
-}
+#terraform {
+#  backend "local" {
+#    path = "/Users/dimitar.dimitrov/devops/telerik/terraform-argocd-sof-app01.tfstate"
+#  }
+#}
