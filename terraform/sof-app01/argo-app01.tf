@@ -33,8 +33,7 @@ resource "argocd_application" "sof-app01" {
       repo_url        = "https://github.com/dimitardd/devops-programme"
       path            = "deployment"
       target_revision = "main"
-      # Uncomment and add if required:
-      # repo            = "https://github.com/dimitardd/devops-programme"
     }
   }
 }
+
