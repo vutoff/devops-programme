@@ -12,6 +12,7 @@ on:
       - '.editorconfig'
       - '*.md'
       - 'LICENSE'
+      - 'github/workflows/github-action-terraform.yml'
     branches:
       - main
       - dimitardd-281024
