@@ -166,7 +166,7 @@ jobs:
          git config --local user.name "Dimitar Dimitrov"
          git add $GITHUB_WORKSPACE/deployment/sof-app01.yaml
          git commit -m "Update image to ${{ github.sha }}"
-         git push origin dimitardd-281024
+         git push origin main
        env:
          github_token: ${{ secrets.GIT_TOKEN }}
          GITHUB_SHA: ${{ github.sha }}
