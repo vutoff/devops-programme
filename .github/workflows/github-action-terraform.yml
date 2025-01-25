@@ -27,4 +27,6 @@ jobs:
             cd terraform/sof-app01
             terraform init
       - name: Terraform Plan
-        run: terraform plan
+        run: |
+            cd terraform/sof-app01
+            terraform plan
