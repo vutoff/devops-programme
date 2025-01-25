@@ -28,5 +28,8 @@ jobs:
             terraform init
       - name: Terraform Plan
         run: |
+            export KUBECONFIG=~/.kube/sof-lab03
+            kubectl config set-context sof-lab03
+            kubectl port-forward svc/argo-cd-7-1734333419-argocd-server -n argocd 8080:443
             cd terraform/sof-app01
             terraform plan
