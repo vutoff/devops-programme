@@ -1,5 +1,5 @@
 name: GitHub Actions Terraform
-run-name: ${{ github.actor }} GitHub Actions 🚀
+run-name: ${{ github.actor }} Terraform GitHub Actions 🚀
 on:
   push:
     paths:
