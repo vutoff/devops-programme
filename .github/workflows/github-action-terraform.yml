@@ -44,28 +44,28 @@ jobs:
         run: |
             for dir in ${changed_dirs//,/ }; do
             echo "Initializing Terraform in directory: $dir"
-            cd $dir
+            cd /opt/actions-runner/_work/devops-programme/devops-programme/$dir
             terraform init
             done
       - name: Kubernetes access preparation
-        if: github.env.should_run == 'true'
+        if: env.should_run == 'true'
         run: |
             export KUBECONFIG=~/.kube/sof-lab03
             kubectl config set-context sof-lab03
             kubectl port-forward svc/argo-cd-7-1734333419-argocd-server -n argocd 8080:443 &
       - name: Terraform Plan
-        if: github.env.should_run == 'true'
+        if: env.should_run == 'true'
         run: |
             for dir in ${changed_dirs//,/ }; do
             echo "Running Terraform plan in directory: $dir"
-            cd $dir
+            cd /opt/actions-runner/_work/devops-programme/devops-programme/$dir
             terraform plan
             done
       - name: Terraform Apply
-        if: github.env.should_run == 'true'
+        if: env.should_run == 'true'
         run: |
-            for dir in $changed_dirs; do
+            for dir in ${changed_dirs//,/ }; do
             echo "Applying Terraform changes in directory: $dir"
-            cd $dir
+            cd /opt/actions-runner/_work/devops-programme/devops-programme/$dir
             terraform apply -auto-approve
             done
