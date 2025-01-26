@@ -38,14 +38,14 @@ jobs:
               echo "Changes detected in: $changed_dirs"
               echo "should_run=true" >> $GITHUB_ENV
             fi
-
+            echo $should_run
       - name: Terraform Init
         if: github.env.should_run == 'true'
         run: |
-            for dir in $changed_dirs; do
-              echo "Initializing Terraform in directory: $dir"
-              cd $dir
-              terraform init
+            for dir in ${changed_dirs//,/ }; do
+            echo "Initializing Terraform in directory: $dir"
+            cd $dir
+            terraform init
             done
       - name: Kubernetes access preparation
         if: github.env.should_run == 'true'
@@ -56,16 +56,16 @@ jobs:
       - name: Terraform Plan
         if: github.env.should_run == 'true'
         run: |
-            for dir in $changed_dirs; do
-              echo "Running Terraform plan in directory: $dir"
-              cd $dir
-              terraform plan
+            for dir in ${changed_dirs//,/ }; do
+            echo "Running Terraform plan in directory: $dir"
+            cd $dir
+            terraform plan
             done
       - name: Terraform Apply
         if: github.env.should_run == 'true'
         run: |
             for dir in $changed_dirs; do
-              echo "Applying Terraform changes in directory: $dir"
-              cd $dir
-              terraform apply -auto-approve
+            echo "Applying Terraform changes in directory: $dir"
+            cd $dir
+            terraform apply -auto-approve
             done
