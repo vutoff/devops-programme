@@ -18,7 +18,7 @@ spec:
       serviceAccountName: sof-app01-sa
       containers:
         - name: sof-app01
-          image: dimitardd/dimitar-app02:2b80cf31bff5f03d0e97357ffca9a5c1c08bdfb2 #Auto deplayed from build
+          image: dimitardd/dimitar-app02:f9d8cadb0337ee5794a01a2be80dd6ac1c99d065 #Auto deplayed from build
           #          image: dimitardd/dimitar-app02:b07c7bf5c0df29652dd1c86ec06463770388fb98 #Green
           #          image: dimitardd/dimitar-app02:207e179a46ce047db5ac0d73ec2a1b0fb9352514 #Blue
           #          image: dimitardd/dimitar-app01:e0b1dc1bb0edf9e161d17d7ba1565844b64e8e37  #Yellow
