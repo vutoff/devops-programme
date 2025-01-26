@@ -9,7 +9,7 @@ on:
       - main
       - dimitardd-*
 jobs:
- Terraform-init-plan:
+ Terraform-action:
     runs-on: self-hosted
     steps:
       - name: Check out repo
@@ -20,22 +20,51 @@ jobs:
         uses: hashicorp/setup-terraform@v1
         with:
           terraform_version: 1.10.5
-      - name: Terraform Init sof-app01
+      - name: Determine changed directories
+        id: changed_dirs
         run: |
-            ls -la
-            pwd
-            cd terraform/sof-app01
-            terraform init
+            echo "Finding changed directories..."
+            dirs=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} -- terraform/ | grep -o 'terraform/[^/]*' | sort -u)
+            echo "Changed directories: $dirs"
+            echo "changed_dirs=$dirs" >> $GITHUB_ENV
+      - name: Check for changes in Terraform directories
+        id: check_changes
+        run: |
+            if [ -z "${{ steps.changed_dirs.outputs.changed_dirs }}" ]; then
+              echo "No changes in Terraform directories."
+              echo "should_run=false" >> $GITHUB_ENV
+            else
+              echo "Changes detected in: ${{ steps.changed_dirs.outputs.changed_dirs }}"
+              echo "should_run=true" >> $GITHUB_ENV
+            fi
+
+      - name: Terraform Init
+        if: github.env.should_run == 'true'
+        run: |
+            for dir in ${{ steps.changed_dirs.outputs.changed_dirs }}; do
+              echo "Initializing Terraform in directory: $dir"
+              cd $dir
+              terraform init
+            done
       - name: Kubernetes access preparation
+        if: github.env.should_run == 'true'
         run: |
             export KUBECONFIG=~/.kube/sof-lab03
             kubectl config set-context sof-lab03
             kubectl port-forward svc/argo-cd-7-1734333419-argocd-server -n argocd 8080:443 &
-      - name: Terraform Plan sof-app01
+      - name: Terraform Plan
+        if: github.env.should_run == 'true'
         run: |
-            cd terraform/sof-app01
-            terraform plan
-      - name: Terraform apply sof-app01
+            for dir in ${{ steps.changed_dirs.outputs.changed_dirs }}; do
+              echo "Running Terraform plan in directory: $dir"
+              cd $dir
+              terraform plan
+            done
+      - name: Terraform Apply
+        if: github.env.should_run == 'true'
         run: |
-            cd terraform/sof-app01
-            terraform apply -auto-approve
+            for dir in ${{ steps.changed_dirs.outputs.changed_dirs }}; do
+              echo "Applying Terraform changes in directory: $dir"
+              cd $dir
+              terraform apply -auto-approve
+            done
