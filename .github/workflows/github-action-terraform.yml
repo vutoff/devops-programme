@@ -40,7 +40,7 @@ jobs:
             fi
             echo $should_run
       - name: Terraform Init
-        if: github.env.should_run == 'true'
+        if: env.should_run == 'true'
         run: |
             for dir in ${changed_dirs//,/ }; do
             echo "Initializing Terraform in directory: $dir"
