@@ -16,6 +16,7 @@ on:
       - 'github/workflows/github-actions-demo.yml'
     branches:
       - main
+      - feature-*
 env:
   IMAGE_TAG: dimitardd/dimitar-app02
 jobs:

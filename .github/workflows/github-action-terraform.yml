@@ -10,7 +10,7 @@ on:
       - 'github/workflows/github-action-terraform.yml'
     branches:
       - main
-      - dimitardd-*
+      - infra-*
 jobs:
  Terraform-action:
     runs-on: self-hosted
