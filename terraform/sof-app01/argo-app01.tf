@@ -10,11 +10,7 @@ resource "argocd_application" "sof-app01" {
       sync_options = ["Validate=true"]
 
       retry {
-<<<<<<< HEAD
         limit = "2"
-=======
-        limit = "1"
->>>>>>> dimitardd-281024
 
         backoff {
           duration     = "5s"

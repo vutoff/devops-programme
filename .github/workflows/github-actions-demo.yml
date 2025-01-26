@@ -13,10 +13,7 @@ on:
       - '*.md'
       - 'LICENSE'
       - 'github/workflows/github-action-terraform.yml'
-<<<<<<< HEAD
-=======
       - 'github/workflows/github-actions-demo.yml'
->>>>>>> dimitardd-281024
     branches:
       - main
       - feature-*

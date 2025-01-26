@@ -1,30 +1,18 @@
-<<<<<<< HEAD
-name: GitHub Actions Demo
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
-on:
-=======
 name: GitHub Actions Terraform
 run-name: ${{ github.actor }} Terraform GitHub Actions 🚀
 on:
   schedule:
     # Runs every Hour from 8AM to 5PM on weekdays
     - cron: '0 8-17 * * 1-5'
->>>>>>> dimitardd-281024
   push:
     paths:
       - 'terraform/**'
       - 'github/workflows/github-action-terraform.yml'
     branches:
       - main
-<<<<<<< HEAD
-      - dimitardd-*
-jobs:
- Terraform-init-plan:
-=======
       - infra-*
 jobs:
  Terraform-action:
->>>>>>> dimitardd-281024
     runs-on: self-hosted
     steps:
       - name: Check out repo
@@ -35,12 +23,6 @@ jobs:
         uses: hashicorp/setup-terraform@v1
         with:
           terraform_version: 1.10.5
-<<<<<<< HEAD
-      - name: Terraform Init
-        run: terraform init
-      - name: Terraform Plan
-        run: terraform plan
-=======
       - name: Determine changed directories
         id: changed_dirs
         run: |
@@ -90,4 +72,3 @@ jobs:
             cd /opt/actions-runner/_work/devops-programme/devops-programme/$dir
             terraform apply -auto-approve
             done
->>>>>>> dimitardd-281024
