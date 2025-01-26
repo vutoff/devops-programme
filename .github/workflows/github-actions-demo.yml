@@ -1,5 +1,5 @@
 name: GitHub Actions Demo
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+run-name: ${{ github.actor }} is deploying with GitHub Actions🚀
 on:
   push:
     paths-ignore:
@@ -13,6 +13,7 @@ on:
       - '*.md'
       - 'LICENSE'
       - 'github/workflows/github-action-terraform.yml'
+      - 'github/workflows/github-actions-demo.yml'
     branches:
       - main
 env:
