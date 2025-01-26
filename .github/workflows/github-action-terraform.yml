@@ -1,5 +1,5 @@
-name: GitHub Actions Demo
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+name: GitHub Actions Terraform
+run-name: ${{ github.actor }} GitHub Actions 🚀
 on:
   push:
     paths:
@@ -35,3 +35,7 @@ jobs:
         run: |
             cd terraform/sof-app01
             terraform plan
+      - name: Terraform apply sof-app01
+        run: |
+            cd terraform/sof-app01
+            terraform apply -auto-approve
