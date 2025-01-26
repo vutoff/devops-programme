@@ -10,7 +10,7 @@ resource "argocd_application" "sof-app01" {
       sync_options = ["Validate=true"]
 
       retry {
-        limit = "3"
+        limit = "4"
 
         backoff {
           duration     = "5s"

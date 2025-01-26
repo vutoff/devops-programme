@@ -25,8 +25,9 @@ jobs:
         run: |
             echo "Finding changed directories..."
             dirs=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} -- terraform/ | grep -o 'terraform/[^/]*' | sort -u)
+            changed_dirs=$(echo "$dirs" | tr '\n' ',' | sed 's/,$//')
             echo "Changed directories: $dirs"
-            echo "changed_dirs=$dirs" >> $GITHUB_ENV
+            echo "changed_dirs=$changed_dirs" >> $GITHUB_ENV
       - name: Check for changes in Terraform directories
         id: check_changes
         run: |
