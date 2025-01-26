@@ -1,15 +1,30 @@
+<<<<<<< HEAD
 name: GitHub Actions Demo
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on:
+=======
+name: GitHub Actions Terraform
+run-name: ${{ github.actor }} Terraform GitHub Actions 🚀
+on:
+  schedule:
+    # Runs every Hour from 8AM to 5PM on weekdays
+    - cron: '0 8-17 * * 1-5'
+>>>>>>> dimitardd-281024
   push:
     paths:
       - 'terraform/**'
       - 'github/workflows/github-action-terraform.yml'
     branches:
       - main
+<<<<<<< HEAD
       - dimitardd-*
 jobs:
  Terraform-init-plan:
+=======
+      - infra-*
+jobs:
+ Terraform-action:
+>>>>>>> dimitardd-281024
     runs-on: self-hosted
     steps:
       - name: Check out repo
@@ -20,7 +35,59 @@ jobs:
         uses: hashicorp/setup-terraform@v1
         with:
           terraform_version: 1.10.5
+<<<<<<< HEAD
       - name: Terraform Init
         run: terraform init
       - name: Terraform Plan
         run: terraform plan
+=======
+      - name: Determine changed directories
+        id: changed_dirs
+        run: |
+            echo "Finding changed directories..."
+            dirs=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} -- terraform/ | grep -o 'terraform/[^/]*' | sort -u)
+            changed_dirs=$(echo "$dirs" | tr '\n' ',' | sed 's/,$//')
+            echo "Changed directories: $dirs"
+            echo "changed_dirs=$changed_dirs" >> $GITHUB_ENV
+      - name: Check for changes in Terraform directories
+        id: check_changes
+        run: |
+            if [ -z "$changed_dirs" ]; then
+              echo "No changes in Terraform directories."
+              echo "should_run=false" >> $GITHUB_ENV
+            else
+              echo "Changes detected in: $changed_dirs"
+              echo "should_run=true" >> $GITHUB_ENV
+            fi
+            echo $should_run
+      - name: Terraform Init
+        if: env.should_run == 'true'
+        run: |
+            for dir in ${changed_dirs//,/ }; do
+            echo "Initializing Terraform in directory: $dir"
+            cd /opt/actions-runner/_work/devops-programme/devops-programme/$dir
+            terraform init
+            done
+      - name: Kubernetes access preparation
+        if: env.should_run == 'true'
+        run: |
+            export KUBECONFIG=~/.kube/sof-lab03
+            kubectl config set-context sof-lab03
+            kubectl port-forward svc/argo-cd-7-1734333419-argocd-server -n argocd 8080:443 &
+      - name: Terraform Plan
+        if: env.should_run == 'true'
+        run: |
+            for dir in ${changed_dirs//,/ }; do
+            echo "Running Terraform plan in directory: $dir"
+            cd /opt/actions-runner/_work/devops-programme/devops-programme/$dir
+            terraform plan
+            done
+      - name: Terraform Apply
+        if: env.should_run == 'true'
+        run: |
+            for dir in ${changed_dirs//,/ }; do
+            echo "Applying Terraform changes in directory: $dir"
+            cd /opt/actions-runner/_work/devops-programme/devops-programme/$dir
+            terraform apply -auto-approve
+            done
+>>>>>>> dimitardd-281024

@@ -29,6 +29,6 @@ provider "argocd" {
 
 terraform {
   backend "local" {
-    path = "/Users/dimitar.dimitrov/devops/telerik/terraform-argocd-sof-app02.tfstate"
+    path = "/opt/actions-runner/terraform-argocd-sof-app02.tfstate"
   }
 }
