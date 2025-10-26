@@ -1,0 +1,2 @@
+# Professional Background
+# Proactive and detail-oriented System Administrator with hands-on experience in Linux and Windows environments, managing and maintaining enterprise-grade IT infrastructures. Experienced with Git, Atlassian tools (Jira, Confluence)and DevOps platforms such as Jenkins, SonarQube, and Artifactory. Well-versed in terminal operations and collaborative platforms like GitHub, supporting efficient automation, configuration management, and seamless collaboration across development and operations teams.
