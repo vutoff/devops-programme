@@ -26,4 +26,4 @@ USER myuser
 EXPOSE 5000
 
 # Стартираме приложението
-CMD ["python3", "app.py"]
+CMD ["python3", "app/app.py"]
