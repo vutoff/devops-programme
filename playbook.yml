@@ -1,96 +1,38 @@
 ---
-- name: Build, push, and run the Python app container
+- name: Build and run Python app container
   hosts: localhost
   connection: local
-  gather_facts: true
-
-  collections:
-    - community.docker
 
   vars:
-    # === Your homework variables ===
     image_name: "cyrixrr/python-app"
     image_tag: "v2"
     listen_port: 8000
 
-    # === Optional (only needed for push) ===
-    docker_registry: "docker.io"
-    docker_username: ""   # set when you want to push
-    docker_password: ""   # set when you want to push
-
-    # Build context (repo root that has the Dockerfile)
-    app_dir: "{{ playbook_dir }}"
+  collections:
+    - community.docker
 
   tasks:
-    # --- Pick the correct Docker socket (Linux / Docker Desktop / Rancher Desktop) ---
-    - name: Detect Rancher Desktop Docker socket
-      ansible.builtin.stat:
-        path: "{{ ansible_env.HOME }}/.rd/run/docker.sock"
-      register: rd_sock
 
-    - name: Detect Docker Desktop Docker socket
-      ansible.builtin.stat:
-        path: "{{ ansible_env.HOME }}/.docker/run/docker.sock"
-      register: dd_sock
-
-    - name: Choose effective docker_host
-      ansible.builtin.set_fact:
-        effective_docker_host: >-
-          {{
-            ('unix://' + ansible_env.HOME + '/.rd/run/docker.sock') if rd_sock.stat.exists else
-            ('unix://' + ansible_env.HOME + '/.docker/run/docker.sock') if dd_sock.stat.exists else
-            'unix:///var/run/docker.sock'
-          }}
-
-    # --- Optional login for push ---
-    - name: Log in to container registry (if credentials provided)
-      when:
-        - docker_username | length > 0
-        - docker_password | length > 0
-      community.docker.docker_login:
-        registry_url: "{{ docker_registry }}"
-        username: "{{ docker_username }}"
-        password: "{{ docker_password }}"
-        reauthorize: true
-        docker_host: "{{ effective_docker_host }}"
-
-    # --- Build image ---
     - name: Build the Docker image
       community.docker.docker_image:
         name: "{{ image_name }}"
         tag: "{{ image_tag }}"
         build:
-          path: "{{ app_dir }}"
-          pull: true
+          path: "{{ playbook_dir }}"
         source: build
-        docker_host: "{{ effective_docker_host }}"
 
-    # --- Push image (only if logged in) ---
-    - name: Push the Docker image (if logged in)
-      when:
-        - docker_username | length > 0
-        - docker_password | length > 0
-      community.docker.docker_image:
-        name: "{{ image_name }}"
-        tag: "{{ image_tag }}"
-        push: true
-        docker_host: "{{ effective_docker_host }}"
-
-    # --- Run container ---
-    - name: Remove existing container (idempotent cleanup)
+    - name: Remove existing container if present
       community.docker.docker_container:
-        name: "devops-programme-app"
+        name: python-app
         state: absent
-        docker_host: "{{ effective_docker_host }}"
 
-    - name: Run the container with PORT env and port binding
+    - name: Run the Docker container
       community.docker.docker_container:
-        name: "devops-programme-app"
+        name: python-app
         image: "{{ image_name }}:{{ image_tag }}"
         env:
-          PORT: "{{ listen_port | string }}"
+          PORT: "{{ listen_port }}"
         published_ports:
           - "{{ listen_port }}:{{ listen_port }}"
-        restart_policy: unless-stopped
         state: started
-        docker_host: "{{ effective_docker_host }}"
+        restart_policy: unless-stopped
