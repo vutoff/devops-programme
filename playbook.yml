@@ -7,6 +7,7 @@
     image_name: "cyrixrr/python-app"
     image_tag: "v2"
     listen_port: 8000 # Here we set our variables
+    host_port: "{{ listen_port }}" # New variable – this is the port we check and remove other containers from
 
   collections:
     - community.docker # Here we gave acces to Docker modules
@@ -19,7 +20,30 @@
         tag: "{{ image_tag }}"
         build:
           path: "{{ playbook_dir }}"
-        source: build #This would like this in shell "docker build -t cyrixrr/python-app:v2 .""
+        source: build #This would like this in shell "docker build -t cyrixrr/python-app:v2 .
+
+    # ---------------- NEW BLOCK START ----------------
+    - name: Get Docker host info (list of all containers) # New – we gather container info so we can check used ports
+      community.docker.docker_host_info:
+        containers: true
+      register: host_info
+
+    - name: Remove ANY container using the host port # New – this removes any container that is using listen_port
+      community.docker.docker_container:
+        name: "{{ (item.Names is string) | ternary(item.Names, (item.Names | first | regex_replace('^/', ''))) }}"
+        state: absent
+      loop: "{{ host_info.containers | default([]) }}"
+      when: >
+        item.Ports is defined and
+        (
+          item.Ports
+          | selectattr('PublicPort','defined')
+          | selectattr('PublicPort','equalto', host_port | int)
+          | list | length
+        ) > 0
+      # This loop checks every container, and if it is using 8000 on the host,
+      # we remove it. This makes the playbook idempotent and avoids port conflicts.
+    # ---------------- NEW BLOCK END ------------------
 
     - name: Remove existing container if present
       community.docker.docker_container:
@@ -31,8 +55,8 @@
         name: python-app
         image: "{{ image_name }}:{{ image_tag }}"
         env:
-          PORT: "{{ listen_port }}"
+          PORT: "{{ listen_port | string }}"
         published_ports:
-          - "{{ listen_port }}:{{ listen_port }}"
+          - "{{ host_port }}:{{ listen_port }}" # Updated to use host_port so we can remove others first
         state: started
         restart_policy: unless-stopped #All this would like this in shell "docker run -d --name python-app -e PORT=8000 -p 8000:8000 cyrixrr/python-app:v2"
