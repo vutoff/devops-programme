@@ -4,14 +4,20 @@ on:
   pull_request:   # Задаваме trigger-а
     branches:
       - main
+    paths:                      # Kои файлове trigger-ват workflow-а
+      - 'app/**/*.py'           # само .py файлове в app/
+      - '.github/workflows/**'  # или при промяна на workflow файловете
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Print a message
         run: echo "Hello! This workflow runs on every pull request to main"
+
+      - name: Run tests
+        run: echo "This runs only if Python files were changed in app/ folder"
