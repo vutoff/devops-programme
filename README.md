@@ -1,4 +1,3 @@
-# FIRST SORRY FOR MAKING THIS PULL REQUESTS WITH DELAY, BUT I WAS SICK.
 # Ansible Playbook --- Build & Run Python App (Docker)
 
 This playbook builds a Docker image for the Python application, removes
