@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: programme-nginx-pod
+  name: programme-nginx-pod
+spec:
+  containers:
+  - image: nginx:1.27
+    name: programme-nginx-pod
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Never
+status: {}
